@@ -32,12 +32,18 @@ html, body {
 
 /* Estilos básicos para Particles.js */
 #particles-js { 
-    position: fixed; 
+    /* CLAVE: Cambiar a 'fixed' para que cubra todo el viewport y no solo el documento */
+    position: fixed; /* Mantenemos fixed de tu CSS original */
+    
     top: 0;
     left: 0;
     width: 100%; 
     height: 100%; 
-    z-index: -2;
+    
+    /* El color de fondo y z-index se mantienen */
+    background-color: #c1a9cb; /* Fondo de la partícula */
+    background-position: 50% 50%; 
+    z-index: -1;
 }
 
 /* Solución para evitar el desplazamiento al abrir el menú móvil */
