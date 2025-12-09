@@ -1454,25 +1454,6 @@ footer{
 .cookie-accept-btn:hover {
     background-color: #552467; /* Un tono un poco más oscuro al pasar el ratón */
 }
-
-/* Responsive para dispositivos pequeños */
-@media (max-width: 700px) {
-    .cookie-consent-bar {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    .cookie-consent-bar p {
-        text-align: center;
-    }
-}
-.cookie-link {
-    color: var(--accent-light); /* o usa un blanco puro (#fff) */
-    text-decoration: underline;
-    font-weight: 600;
-}
-/* ... (resto del CSS) ... */
-
 /* ======================================= */
 /* RESPONSIVE */
 /* ======================================= */
