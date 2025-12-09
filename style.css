@@ -9,12 +9,76 @@
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
-body{
-  font-family: Inter, system-ui, Arial;
-  background:linear-gradient(180deg,var(--bg-primary),var(--bg-secondary));
-  color:var(--text);
+/* ==================================== */
+/* === PARTICLES.JS CUSTOM STYLES === */
+/* ==================================== */
+
+/* ---- reset ---- (Añadido/Modificado) */
+body {
+  /* Asegura que body no tenga un background-color sólido que tape las partículas */
+  /* background-color: transparent; (Mantenemos la regla de tu CSS original) */
+  font-family: Montserrat, system-ui, Montserrat; /* Nuevo: Fuente y tamaño base */
+}
+canvas {
+  display: block;
+  vertical-align: bottom;
+} 
+
+/* Contenedor de partículas: Fija la posición y establece el fondo */
+#particles-js{ 
+    /* CLAVE: Cambiar a 'fixed' para que cubra todo el viewport y no solo el documento */
+    position: fixed; /* Mantenemos fixed de tu CSS original */
+    
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    
+    /* El color de fondo y z-index se mantienen */
+    background-color: #c1a9cb; /* Fondo de la partícula */
+    background-position: 50% 50%; 
+    z-index: -1; /* CLAVE: Mantenerlo detrás de todo */
 }
 
+/* Estilos para el contador de partículas (MODIFICADO para coincidir con tu request) */
+.count-particles {
+    background: #6e2d81; /* Morado del acento */
+    position: absolute; 
+    top: 48px; 
+    left: 0; 
+    width: 80px; 
+    color: #13E8E9; /* Color de texto del contador */
+    font-size: .8em; 
+    text-align: left; 
+    text-indent: 4px; 
+    line-height: 14px; 
+    padding-bottom: 2px; 
+    font-family: Helvetica, Arial, sans-serif; 
+    font-weight: bold; 
+    z-index: 9999; /* Alto para que sea visible */
+} 
+.js-count-particles{ 
+    font-size: 1.1em; 
+} 
+#stats, .count-particles{ 
+    -webkit-user-select: none; 
+    margin-top: 5px; 
+    margin-left: 5px; 
+} 
+#stats{ 
+    border-radius: 3px 3px 0 0; 
+    overflow: hidden; 
+} 
+.count-particles{ 
+    border-radius: 0 0 3px 3px; 
+}
+
+/* También, verifica que el cuerpo (body) de tu CSS no tenga un fondo sólido que tape las partículas */
+body {
+    /* Asegura que body no tenga un background-color blanco o sólido */
+    /* background-color: transparent; */ 
+    /* ... otros estilos de body ... */
+}
 /* HEADER */
 header{
   width: 100%;
@@ -352,8 +416,7 @@ footer{
 /* --- ESTILOS DE LA PÁGINA DE CONTACTO --- */
 
 .contact-section {
-    padding: 80px 40px;
-    background-color: var(--bg-primary); 
+    padding: 80px 40px; 
 }
 
 /* Contenedor principal para centrar y aplicar Flexbox */
@@ -471,29 +534,6 @@ footer{
     transform: translateY(-2px);
 }
 
-/* RESPONSIVE para Contacto */
-@media (max-width: 900px) {
-    .contact-container {
-        flex-direction: column; /* Apila los bloques verticalmente */
-        gap: 40px;
-    }
-
-    .contact-text-block,
-    .contact-form-block {
-        flex: auto;
-        padding: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .contact-section {
-        padding: 40px 20px;
-    }
-    .input-group {
-        /* En móvil, los campos Nombre/Apellidos también ocupan todo el ancho */
-        flex: 1 1 100%; 
-    }
-}
 /* --- ESTILOS DE LA PÁGINA DE PREGUNTAS FRECUENTES (FAQ) --- */
 
 .faq-section {
@@ -1539,40 +1579,98 @@ footer{
     text-decoration: underline;
     font-weight: 600;
 }
-/* ... (resto del CSS) ... */
-
 /* ======================================= */
 /* RESPONSIVE */
 /* ======================================= */
 @media(max-width: 800px){
     /* HEADER & NAV CORRECCIÓN */
-    header{
+@media (max-width: 768px) {
+    /* **ESTILOS DEL HEADER** (Ajustados de tu código) */
+    .site-header {
+        /* Aseguramos que el header sea un contenedor flexible para alinear logo, botón y carrito */
+        display: flex; 
+        align-items: center;
         padding: 20px;
-        justify-content: space-between; /* Arregla el centrado del header */
+        justify-content: space-between; 
         gap: 0; 
     }
     .logo-link img.logo { height: 60px; }
-    
-    /* MOSTRAR SOLO ENLACE DE PRODUCTOS */
-    .nav-container{ 
-        display: flex !important; /* FORZAR: Asegura que el contenedor de navegación sea visible */
-        padding: 8px 12px; 
-        gap: 0; 
+
+
+    /* **ESTILOS DEL BOTÓN HAMBURGUESA** */
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1000; /* Siempre encima del menú */
     }
 
-    /* 1. Ocultar todos los enlaces del menú por defecto */
+    .hamburger-btn .bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #333; /* Color de las barras */
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* **ANIMACIÓN (TRANSFORMACIÓN A 'X')** */
+    .hamburger-btn.open .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+    .hamburger-btn.open .bar:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+
+    /* **ESTILOS DEL MENÚ COMPLETO (OCULTO POR DEFECTO)** */
+.nav-container {
+        display: none !important; 
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        /* ---------------------------------------------------- */
+        /* ✨ NUEVOS ESTILOS PARA EL EFECTO CRISTAL ✨ */
+        /* ---------------------------------------------------- */
+        /* 1. Fondo semitransparente (Necesario para que el filtro funcione) */
+        background-color: rgba(0, 0, 0, 0.7); 
+        
+        /* 2. Propiedad de filtro (Añade el desenfoque) */
+        backdrop-filter: blur(8px); 
+        -webkit-backdrop-filter: blur(8px); /* Para compatibilidad con Safari */
+        /* ---------------------------------------------------- */
+        
+        padding-top: 80px; 
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    /* **ESTILO DEL MENÚ CUANDO ESTÁ ABIERTO** */
+    .nav-container.open {
+        display: flex !important; 
+    }
+
+    /* Estilo para los enlaces dentro del menú móvil (todos visibles) */
     .nav-container a {
-        display: none !important; /* FORZAR: Oculta todos los enlaces */
-    }
-
-    /* 2. Mostrar solo el enlace de PRODUCTOS */
-    .nav-container a[href*="productos.html"] { 
-        display: block !important; /* FORZAR: Muestra solo este enlace */
-        font-size: 0.9rem;
-        padding: 6px 10px;
-        flex-shrink: 0;
+        display: block !important;
+        color: white;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 1.2em;
+        width: 100%;
+        /* Opcional: Para mejorar la legibilidad sobre el fondo desenfocado, podrías añadir un borde o sombra sutil */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
     }
     
+    /* **OTROS ESTILOS DEL USUARIO** (Mantenidos) */
+
     /* Ajustar la burbuja del carrito */
     .cart-bubble{
         padding: 6px 10px;

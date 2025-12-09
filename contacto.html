@@ -8,100 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<script>
-    // 1. Inicializar el carrito en el almacenamiento local del navegador
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+<div id="particles-js"></div> 
+<div class="count-particles"> <span class="js-count-particles">--</span> particles </div> 
 
-    // Costante para el costo de envío (usada en checkout)
-    const SHIPPING_COST = 5.00;
-
-    // Función para guardar el carrito
-    function saveCart() {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    // Función para actualizar el contador del carrito en el header
-    function updateCartCount() {
-        const cartBubbleSpan = document.querySelector('.cart-bubble span');
-        // Usamos la cantidad de items individuales en el array para el contador
-        cartBubbleSpan.textContent = `Carrito (${cart.length})`;
-    }
-    
-    // Función para mostrar una notificación de éxito temporal
-    function showNotification(productName, cardElement) {
-        // Opción 1: Notificación al lado del botón (más visualmente enfocado)
-        const notification = document.createElement('div');
-        notification.classList.add('added-success-message');
-        notification.textContent = `✅ ¡${productName} añadido!`;
-        
-        // Insertamos el mensaje justo debajo del botón o dentro de la tarjeta
-        cardElement.appendChild(notification);
-        
-        // Eliminamos la notificación después de 2 segundos
-        setTimeout(() => {
-            notification.remove();
-        }, 2000); 
-
-        // Opción 2: Resaltar temporalmente la burbuja del carrito (más discreto, requiere CSS)
-        const cartBubble = document.querySelector('.cart-bubble');
-        cartBubble.classList.add('flash-cart'); 
-        setTimeout(() => {
-            cartBubble.classList.remove('flash-cart');
-        }, 500);
-    }
-
-    // 2. Función para añadir un producto
-    function addToCart(name, price, cardElement) {
-        const item = {
-            name: name,
-            price: price,
-            units: 1 
-        };
-
-        cart.push(item);
-        saveCart();
-
-        // Muestra la notificación temporal
-        showNotification(name, cardElement);
-        
-        // Actualiza el contador
-        updateCartCount();
-    }
-
-    // 3. Asignar el evento al botón
-    document.addEventListener('DOMContentLoaded', () => {
-        // Asignar listeners a todos los botones 'Añadir al carrito'
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const card = e.target.closest('.product-card');
-                const name = card.querySelector('.product-name').textContent;
-                // Asumiendo que el precio está en el formato "XX,XX €"
-                const priceText = card.querySelector('.product-price').textContent.replace(' €', '').replace(',', '.');
-                const price = parseFloat(priceText);
-                
-                addToCart(name, price, card); // Pasamos la tarjeta para saber dónde poner la notificación
-            });
-        });
-
-        // Hacemos que la burbuja del carrito navegue a la página de checkout
-        document.querySelector('.cart-bubble').addEventListener('click', () => {
-            window.location.href = 'checkout.html';
-        });
-        
-        // Inicializar el contador al cargar la página
-        updateCartCount();
-    });
-</script>
 <header class="site-header">
     <a href="index.html" class="logo-link">
         <img src="logo.svg" alt="Logo" class="logo">
     </a>
 
-    <nav class="nav-container">
+<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <nav class="nav-container" id="mobile-menu">
         <a href="productos.html">Productos</a>
         <a href="contacto.html">Contacto</a>
         <a href="quienes-somos.html">Quiénes somos</a>
-        <a href="preguntas-frecuentes.html">FAQ</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
     </nav>
 
     <div class="cart-bubble">
@@ -178,31 +103,205 @@
     </div>
     <div class="discover">DISCOVER THE VOID</div>
 </footer>
+
+<div id="cookie-popup" class="cookie-consent-bar">
+    <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
+    <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const popup = document.getElementById('cookie-popup');
         const acceptBtn = document.getElementById('accept-cookies-btn');
 
-        // 1. Verificar si el usuario ya aceptó las cookies
         const consentGiven = localStorage.getItem('cookies_accepted');
 
         if (!consentGiven) {
-            // 2. Si NO ha aceptado, mostramos el popup
             popup.style.display = 'flex';
         }
 
-        // 3. Agregar el listener al botón para aceptar
         acceptBtn.addEventListener('click', () => {
-            // Guardar la preferencia en el navegador
             localStorage.setItem('cookies_accepted', 'true');
-            // Ocultar el popup
             popup.style.display = 'none';
         });
     });
 </script>
-<div id="cookie-popup" class="cookie-consent-bar">
-    <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
-    <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
-</div>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const SHIPPING_COST = 5.00; 
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        cartBubbleSpan.textContent = `Carrito (${cart.length})`;
+    }
+    
+    function showNotification(productName, cardElement) {
+        const notification = document.createElement('div');
+        notification.classList.add('added-success-message');
+        notification.textContent = `✅ ¡${productName} añadido!`;
+        cardElement.appendChild(notification);
+        setTimeout(() => {
+            notification.remove();
+        }, 2000); 
+
+        const cartBubble = document.querySelector('.cart-bubble');
+        cartBubble.classList.add('flash-cart'); 
+        setTimeout(() => {
+            cartBubble.classList.remove('flash-cart');
+        }, 500);
+    }
+
+    function addToCart(name, price, cardElement) {
+        const item = {
+            name: name,
+            price: price,
+            units: 1 
+        };
+
+        cart.push(item);
+        saveCart();
+        showNotification(name, cardElement);
+        updateCartCount();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const card = e.target.closest('.product-card');
+                const name = card.querySelector('.product-name').textContent;
+                const priceText = card.querySelector('.product-price').textContent.replace(' €', '').replace(',', '.');
+                const price = parseFloat(priceText);
+                
+                addToCart(name, price, card);
+            });
+        });
+
+        document.querySelector('.cart-bubble').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+        
+        updateCartCount();
+    });
+</script>
+
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+<script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: "#6e2d81" },
+            shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 }
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 2, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "bubble" },
+                onclick: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    var count_particles, stats, update;
+    stats = new Stats();
+    stats.setMode(0);
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.left = "0px";
+    stats.domElement.style.top = "0px";
+    document.body.appendChild(stats.domElement);
+    count_particles = document.querySelector(".js-count-particles");
+    update = function () {
+        stats.begin();
+        stats.end();
+        if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS && window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+        } else {
+             count_particles.innerText = '--';
+        }
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.querySelector('.nav-container');
+        const body = document.body;
+
+        // Lógica de Cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+        if (!consentGiven) { popup.style.display = 'flex'; }
+
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('cookies_accepted', 'true');
+            popup.style.display = 'none';
+        });
+
+        // Lógica del Menú Móvil
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                body.classList.toggle('menu-active');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
 </body>
 </html>

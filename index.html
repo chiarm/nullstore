@@ -34,12 +34,17 @@
     <a href="index.html" class="logo-link">
         <img src="logo.svg" alt="Logo" class="logo">
     </a>
+	<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
 
-    <nav class="nav-container">
+    <nav class="nav-container" id="mobile-menu">
         <a href="productos.html">Productos</a>
         <a href="contacto.html">Contacto</a>
         <a href="quienes-somos.html">Quiénes somos</a>
-        <a href="preguntas-frecuentes.html">FAQ</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
     </nav>
 
     <div class="cart-bubble">
@@ -121,6 +126,42 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Obtenemos el botón y el menú por sus IDs
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const body = document.body;
+
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                // 1. Alterna la clase 'open' en el botón para la animación a 'X'
+                toggleBtn.classList.toggle('open');
+                
+                // 2. Alterna la clase 'open' en el menú para mostrarlo/ocultarlo
+                mobileMenu.classList.toggle('open');
+                
+                // 3. Opcional: Alterna una clase en el body para prevenir el scroll de fondo
+                body.classList.toggle('menu-active');
+            });
+            
+            // Opcional: Cerrar el menú si el usuario hace clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
+<style>
+    /* Bloquea el scroll de la página cuando el menú está abierto */
+    body.menu-active {
+        overflow: hidden; 
+    }
+</style>
 <div id="cookie-popup" class="cookie-consent-bar">
     <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
     <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>

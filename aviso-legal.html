@@ -13,8 +13,13 @@
         <img src="logo.svg" alt="Logo" class="logo">
     </a>
 
-    <nav class="nav-container">
-        <a href="index.html">Inicio</a>
+<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <nav class="nav-container" id="mobile-menu">
         <a href="productos.html">Productos</a>
         <a href="contacto.html">Contacto</a>
         <a href="quienes-somos.html">Quiénes somos</a>
@@ -139,6 +144,39 @@
         </div>
     </div>
 </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.querySelector('.nav-container');
+        const body = document.body;
 
+        // Lógica de Cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+        if (!consentGiven) { popup.style.display = 'flex'; }
+
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('cookies_accepted', 'true');
+            popup.style.display = 'none';
+        });
+
+        // Lógica del Menú Móvil
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                body.classList.toggle('menu-active');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
 </body>
 </html>

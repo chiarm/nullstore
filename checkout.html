@@ -11,13 +11,19 @@
 
 <header class="site-header">
     <a href="index.html" class="logo-link">
-        <img src="logo.svg" alt="Logo" class="logo">
+        <img src="Logo.svg" alt="Logo" class="logo">
     </a>
-    <nav class="nav-container">
+<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <nav class="nav-container" id="mobile-menu">
         <a href="productos.html">Productos</a>
         <a href="contacto.html">Contacto</a>
         <a href="quienes-somos.html">Quiénes somos</a>
-        <a href="preguntas-frecuentes.html">FAQ</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
     </nav>
     <div class="cart-bubble">
         <img src="Carrito.svg" alt="Carrito">
@@ -332,5 +338,39 @@
     <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
     <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.querySelector('.nav-container');
+        const body = document.body;
+
+        // Lógica de Cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+        if (!consentGiven) { popup.style.display = 'flex'; }
+
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('cookies_accepted', 'true');
+            popup.style.display = 'none';
+        });
+
+        // Lógica del Menú Móvil
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                body.classList.toggle('menu-active');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
 </body>
 </html>
