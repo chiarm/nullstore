@@ -7,41 +7,54 @@
   --text: #111;
 }
 
-*{ box-sizing:border-box; margin:0; padding:0; }
-body{
-  font-family: Montserrat, system-ui, Montserrat;
-  background:linear-gradient(180deg,var(--bg-primary),var(--bg-secondary));
-  color:var(--text);
+*, *::before, *::after {
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
 }
 
-/* HEADER */
-header{
+body {
+  font-family: Montserrat, system-ui, Montserrat;
+  background: linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Solución para evitar el desplazamiento al abrir el menú móvil */
+body.menu-active {
+    overflow: hidden;
+}
+
+/* ============================================== */
+/* === 1. ENCABEZADO Y NAVEGACIÓN (HEADER) === */
+/* ============================================== */
+
+header {
   width: 100%;
   padding: 20px 40px; 
   display: flex;
   align-items: center;
-  position: fixed; /* Hace que el header flote sobre el contenido */
-    top: 0;          /* Lo fija en la parte superior */
-    left: 0;         /* Asegura que cubra todo el ancho */
-    z-index: 1000;
-  /* Centramos los elementos */
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  z-index: 1000;
   justify-content: center; 
-  /* Espaciado amplio y optimizado entre Logo y Menú/Carrito */
   gap: 180px; 
-  background: #FFFFFF00;
-  color: #fff;
+  background: #FFFFFF00; /* Header transparente */
+  color: var(--accent-light);
 }
+
 .logo-link img.logo { height: 80px; } 
 
 /* Contenedor para el Menú y el Carrito */
 .nav-right {
     display: flex;
     align-items: center;
-    /* Separación adecuada entre Menú y Carrito */
     gap: 40px; 
 }
 
-.nav-container{
+/* Menú de Escritorio (Glassmorphism) */
+.nav-container {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.08);
   padding: 10px 26px;
@@ -49,8 +62,10 @@ header{
   display: flex;
   gap: 18px;
   backdrop-filter: blur(4px);
+  /* Propiedad añadida para evitar parpadeos en móvil antes de abrirse */
+  transform: translateZ(0);
 }
-.nav-container a{
+.nav-container a {
   color: var(--accent-light);
   text-decoration: none;
   font-weight: 600;
@@ -58,13 +73,14 @@ header{
   border-radius: 8px;
   transition: all .18s ease;
 }
-.nav-container a:hover{
+.nav-container a:hover {
   background: var(--accent-dark);
   color: #fff;
   transform: translateY(-2px);
 }
 
-.cart-bubble{
+/* Burbuja de Carrito */
+.cart-bubble {
   background: var(--accent-dark);
   padding: 8px 14px;
   border-radius: 12px;
@@ -73,15 +89,257 @@ header{
   box-shadow: 0 6px 18px rgba(110,45,129,0.12);
   cursor: pointer;
 }
-.cart-bubble img{ height: 28px; filter: brightness(0) invert(1); }
+.cart-bubble img { 
+    height: 28px; 
+    filter: brightness(0) invert(1); 
+    margin-right: 8px;
+}
 
-/* FOOTER */
-footer{
+/* ========================================== */
+/* === 2. BOTÓN HAMBURGUESA (MÓVIL) - BASE === */
+/* ========================================== */
+
+.hamburger-btn {
+    display: none; /* Oculto por defecto en desktop */
+    width: 30px;
+    height: 25px; /* Altura para 3 barras con 5px de margen */
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    z-index: 1001; 
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+/* Las tres barras (líneas) */
+.hamburger-btn .bar {
+    display: block;
+    width: 100%;
+    height: 3px; 
+    background-color: var(--accent-light); /* Color claro para el header oscuro */
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animación a 'X' cuando está abierto (clase 'open' añadida con JS) */
+.hamburger-btn.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-btn.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ======================================= */
+/* 🏠 ESTILOS DE PORTADA (index.html)      */
+/* ======================================= */
+
+.hero-section {
+    position: relative;
+    height: 85vh; 
+    width: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    color: var(--accent-light); 
+    overflow: hidden;
+    background-color: #000000; 
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0; 
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    max-width: 800px;
+    text-align: left; 
+    margin-right: auto; 
+    margin-left: 5%; 
+}
+
+.hero-main-title {
+    font-size: 1.0rem; 
+    font-weight: bold;
+    letter-spacing: 30px; 
+    margin-bottom: 20px; 
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-size: 3.5rem; 
+    margin-top: 15px; 
+    margin-bottom: 25px; 
+    font-weight: 300;
+}
+
+.hero-desc {
+    font-size: 1.5rem; 
+    margin-bottom: 40px;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start; 
+    flex-wrap: wrap; 
+}
+
+.hero-btn {
+    padding: 15px 30px;
+    border: 2px solid;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.btn-ckidd {
+    background-color: #6e2c15; 
+    border-color: #6e2c15; 
+	border-radius: 12px;
+    color: white; 
+}
+
+.btn-ckidd:hover {
+    background-color: transparent; 
+    color: #ff4500; 
+    border-color: #ff4500;
+}
+
+.btn-update {
+    background-color: var(--accent-dark); 
+    border-color: var(--accent-dark);
+	border-radius: 12px;
+    color: white; 
+}
+
+.btn-update:hover {
+    background-color: transparent; 
+    color: var(--accent-dark); 
+    border-color: var(--accent-dark);
+}
+
+/* 🛒 ESTILOS DE SECCIONES DESTACADAS */
+.featured-products {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto; 
+}
+
+.feature-block {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 80px; 
+    gap: 40px; 
+}
+
+.feature-image {
+    flex: 1; 
+    min-width: 0;
+}
+
+.feature-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-text {
+    flex: 1; 
+    padding: 20px;
+}
+
+.feature-text h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--accent-dark);
+}
+
+.feature-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.cta-link {
+    color: #ff4500; 
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid #ff4500;
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.cta-link:hover {
+    color: var(--accent-dark); 
+    border-bottom-color: var(--accent-dark);
+}
+
+.feature-right-image {
+    flex-direction: row-reverse; 
+}
+
+.explore-cta {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.explore-cta h3 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.explore-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* ================================== */
+/* === 3. PIE DE PÁGINA (FOOTER) === */
+/* ================================== */
+
+footer {
   padding: 40px 20px; 
   background: #111;
   color: #fff;
 }
-.footer-container{
+.footer-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -90,41 +348,38 @@ footer{
   gap: 40px;
 }
 
-.footer-links-grid{
+.footer-links-grid {
   display: flex;
   gap: 30px; 
 }
-.col-legal, .col-ayuda{
+.col-legal, .col-ayuda {
   display: flex;
   flex-direction: column;
   gap: 10px; 
 }
-.col-legal a, .col-ayuda a{
+.col-legal a, .col-ayuda a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
 }
-.instagram{ 
+.instagram { 
     display: flex; 
     align-items: center; 
     gap: 8px; 
 }
 
-/* ⬅️ MODIFICACIÓN CLAVE: CAMBIA EL COLOR DEL SVG A BLANCO */
-.instagram img{ 
+.instagram img { 
     height: 28px; 
-    /* Esta línea convierte el icono (asumiendo que es negro o de un color oscuro) a blanco */
     filter: brightness(0) invert(1); 
 }
 
-/* REGLA DEL ENLACE (Ya estaba en blanco) */
 .instagram a {
-    color: #fff; /* Asegura el color blanco para el texto "Síguenos" */
+    color: #fff; 
     text-decoration: none;
     font-weight: 500;
 }
 
-.newsletter input{
+.newsletter input {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.25);
@@ -132,7 +387,7 @@ footer{
   width: 220px;
   margin-right: 8px;
 }
-.newsletter button{
+.newsletter button {
   padding: 10px 14px;
   border-radius: 8px;
   background: var(--accent-dark);
@@ -140,25 +395,13 @@ footer{
   border: none;
   cursor: pointer;
   font-weight: 700;
+  transition: background-color 0.2s;
 }
-.instagram{ display: flex; align-items: center; gap: 8px; }
-.instagram img{ height: 28px; }
-
-/* REGLA AÑADIDA/MODIFICADA: Aseguramos el color blanco para el texto del enlace de Instagram */
-.instagram a {
-    color: #fff; /* Implementación del color blanco */
-    text-decoration: none;
-    font-weight: 500;
-    /* Opcional: añade transición para el hover si lo tienes definido en otro lugar */
-    /* transition: color 0.2s; */
+.newsletter button:hover {
+    background: #552467;
 }
-/* Opcional: Define aquí el estilo hover si es necesario */
-/* .instagram a:hover {
-    color: var(--accent-dark);
-} */
 
-/* ESTILOS DEL DISCOVER */
-.discover{
+.discover {
   margin-top: 60px; 
   text-align: center;
   font-weight: 900; 
@@ -169,9 +412,57 @@ footer{
   text-transform: uppercase; 
   padding: 0 5px; 
 }
-/* --- ESTILOS DE LA PÁGINA DE PRODUCTOS (MEJORADO) --- */
 
-/* Contenedor principal de la sección de productos */
+/* ======================================= */
+/* === 4. POPUP DE COOKIES === */
+/* ======================================= */
+
+.cookie-consent-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--brand-dark); 
+    color: var(--accent-light);         
+    padding: 15px 30px;
+    display: none; /* Inicialmente oculto */
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 10000;
+}
+
+.cookie-consent-bar p {
+    margin: 0;
+    font-size: 0.95rem;
+    max-width: 800px;
+    text-align: center;
+}
+
+.cookie-accept-btn {
+    background-color: var(--accent-dark); 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.cookie-accept-btn:hover {
+    background-color: #552467;
+}
+
+
+/* ======================================= */
+/* === 5. ESTILOS DE OTRAS PÁGINAS (Productos, Contacto, etc.) === */
+/* Se mantienen aquí para tener un solo archivo CSS como lo tenías */
+/* ======================================= */
+
+/* --- PÁGINA DE PRODUCTOS --- */
+
 .products-section {
     padding: 60px 40px;
     max-width: 1400px;
@@ -186,44 +477,34 @@ footer{
     font-weight: 700;
 }
 
-/* La cuadrícula de productos: 4 columnas en escritorio */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 30px;
 }
 
-/* Estilo de la tarjeta de producto */
 .product-card {
     background-color: var(--accent-light);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: hidden;
-    
-    /* MODIFICACIÓN: Sombra base más pronunciada */
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); 
-    
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    
-    /* MEJORA: Flexbox para asegurar que el botón esté siempre abajo */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-/* MODIFICACIÓN: Efecto de elevación mucho más notorio al hacer hover */
 .product-card:hover {
     transform: translateY(-5px);
-    /* Sombra más grande y oscura para el efecto "flotante" */
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); 
 }
 
-/* Estilo para el enlace que envuelve la información */
 .product-card .product-link {
     text-decoration: none; 
     color: inherit; 
     display: block; 
-    flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
+    flex-grow: 1;
 }
 
 .product-image-container {
@@ -235,10 +516,9 @@ footer{
     width: 100%;
     height: 100%;
     object-fit: cover; 
-    transition: transform 0.3s ease; /* Transición para el efecto de zoom */
+    transition: transform 0.3s ease;
 }
 
-/* MEJORA: Zoom sutil en la imagen al hacer hover en la tarjeta */
 .product-card:hover .product-image-container img {
     transform: scale(1.05); 
 }
@@ -252,7 +532,7 @@ footer{
     font-size: 1.25rem;
     margin-bottom: 5px;
     color: var(--brand-dark);
-    font-weight: 600; /* Destaca un poco más el nombre */
+    font-weight: 600; 
 }
 
 .product-description {
@@ -268,83 +548,41 @@ footer{
     margin-bottom: 15px;
 }
 
-/* Estilos del botón Añadir al Carrito */
 .add-to-cart {
     width: 100%;
-    padding: 12px; /* Ligeramente más padding para mejor clic */
+    padding: 12px; 
     border: none;
-    /* MEJORA: Radio consistente con la tarjeta */
     border-radius: 0 0 12px 12px; 
     background-color: var(--accent-dark);
     color: var(--accent-light);
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
-    text-transform: uppercase; /* Consistencia con otros botones */
+    text-transform: uppercase; 
     font-size: 1rem;
 }
 
 .add-to-cart:hover {
-    /* Usamos el color previamente definido para el hover */
     background-color: #552565; 
-    transform: translateY(-1px); /* Efecto sutil al presionar */
+    transform: translateY(-1px);
 }
 
-/* RESPONSIVE para la cuadrícula */
-@media(max-width: 1200px) {
-    /* 3 columnas para tabletas grandes */
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px; 
-    }
-}
-
-@media(max-width: 800px) {
-    /* 2 columnas para móvil/tableta pequeña */
-    .products-section {
-        padding: 40px 20px;
-    }
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-}
-
-@media(max-width: 500px) {
-    /* 1 columna para móviles muy pequeños */
-    .products-section {
-        padding: 30px 15px;
-    }
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-    .product-card {
-        max-width: 350px; /* Centra la tarjeta en la columna única */
-        margin: 0 auto;
-    }
-    .product-image-container {
-        height: 300px; /* Damos más altura ya que el ancho es mayor */
-    }
-}
-/* --- ESTILOS DE LA PÁGINA DE CONTACTO --- */
-
+/* --- PÁGINA DE CONTACTO --- */
 .contact-section {
     padding: 80px 40px;
     background-color: var(--bg-primary); 
 }
 
-/* Contenedor principal para centrar y aplicar Flexbox */
 .contact-container {
     max-width: 1100px;
     margin: 0 auto;
     display: flex;
-    gap: 50px; /* Espacio entre los dos bloques */
-    align-items: flex-start; /* Alinea los bloques arriba */
+    gap: 50px; 
+    align-items: flex-start;
 }
 
-/* Bloque Izquierdo: Texto Informativo */
 .contact-text-block {
-    flex: 1; /* Ocupa la mitad del espacio */
+    flex: 1; 
     padding: 20px 0;
 }
 
@@ -365,13 +603,9 @@ footer{
     padding-top: 15px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-.contact-details p {
-    margin-bottom: 5px;
-}
 
-/* Bloque Derecho: Formulario */
 .contact-form-block {
-    flex: 1; /* Ocupa la otra mitad del espacio */
+    flex: 1; 
     background-color: var(--accent-light);
     padding: 30px;
     border-radius: 12px;
@@ -386,19 +620,18 @@ footer{
 
 .contact-form {
     display: flex;
-    flex-wrap: wrap; /* Permite que los inputs se envuelvan */
-    gap: 15px; /* Espacio entre los campos */
+    flex-wrap: wrap; 
+    gap: 15px; 
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    /* Divide el espacio entre Nombre y Apellidos (50% - gap) */
     flex: 1 1 calc(50% - 7.5px); 
 }
 
 .input-group.full-width {
-    flex: 1 1 100%; /* Ocupa todo el ancho (Email y Mensaje) */
+    flex: 1 1 100%; 
 }
 
 .input-group label {
@@ -415,20 +648,13 @@ footer{
     font-family: inherit;
     font-size: 1rem;
     background-color: #fff;
-    resize: vertical; /* Solo permite redimensionar verticalmente el textarea */
+    resize: vertical; 
 }
 
-.input-group input:focus,
-.input-group textarea:focus {
-    border-color: var(--accent-dark);
-    outline: none;
-}
-
-/* Contenedor del Botón (para alinearlo a la derecha) */
 .button-container {
     width: 100%;
     display: flex;
-    justify-content: flex-end; /* Alinea el botón a la derecha */
+    justify-content: flex-end; 
     margin-top: 10px;
 }
 
@@ -448,34 +674,10 @@ footer{
     transform: translateY(-2px);
 }
 
-/* RESPONSIVE para Contacto */
-@media (max-width: 900px) {
-    .contact-container {
-        flex-direction: column; /* Apila los bloques verticalmente */
-        gap: 40px;
-    }
-
-    .contact-text-block,
-    .contact-form-block {
-        flex: auto;
-        padding: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .contact-section {
-        padding: 40px 20px;
-    }
-    .input-group {
-        /* En móvil, los campos Nombre/Apellidos también ocupan todo el ancho */
-        flex: 1 1 100%; 
-    }
-}
-/* --- ESTILOS DE LA PÁGINA DE PREGUNTAS FRECUENTES (FAQ) --- */
-
+/* --- PÁGINA DE PREGUNTAS FRECUENTES (FAQ) --- */
 .faq-section {
     padding: 80px 40px;
-    max-width: 900px; /* Ancho cómodo para el contenido central */
+    max-width: 900px; 
     margin: 0 auto;
     text-align: center;
 }
@@ -490,30 +692,25 @@ footer{
 .faq-list {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Separación entre los desplegables */
+    gap: 15px; 
 }
 
-/* El elemento <details> como tarjeta de acordeón visual */
 .faq-item {
-    background-color: var(--accent-light); /* Fondo claro para contraste */
+    background-color: var(--accent-light); 
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     text-align: left;
-    
-    /* Indicador visual fuerte: barra lateral */
     border-left: 8px solid var(--bg-secondary);
 }
 
 .faq-item[open] {
-    border-left: 8px solid var(--accent-dark); /* Color de marca cuando está abierto */
-    box-shadow: 0 6px 15px rgba(110, 45, 129, 0.15); /* Sombra más fuerte */
+    border-left: 8px solid var(--accent-dark); 
+    box-shadow: 0 6px 15px rgba(110, 45, 129, 0.15); 
 }
 
-
-/* La pregunta: <summary> */
 .faq-question {
     display: block; 
     padding: 18px 25px;
@@ -526,18 +723,15 @@ footer{
     user-select: none; 
 }
 
-/* Hover effect */
 .faq-item:hover .faq-question {
     background-color: rgba(0, 0, 0, 0.03); 
 }
 
-/* Ocultamos el marcador nativo del details */
 .faq-question::marker,
 .faq-question::-webkit-details-marker {
     display: none; 
 }
 
-/* Icono de + / - personalizado */
 .faq-question::after {
     content: '+';
     position: absolute;
@@ -554,13 +748,11 @@ footer{
     content: '-';
 }
 
-
-/* La respuesta: <div> */
 .faq-answer {
     padding: 0 25px 25px;
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: #fff; /* Fondo blanco puro para la respuesta */
+    background-color: #fff; 
 }
 
 .faq-answer p {
@@ -569,28 +761,7 @@ footer{
     color: var(--text);
 }
 
-
-/* RESPONSIVE */
-@media(max-width: 600px) {
-    .faq-section {
-        padding: 40px 20px;
-    }
-    .faq-item {
-        border-left: 5px solid var(--bg-secondary); /* Barra más delgada en móvil */
-    }
-    .faq-question {
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
-    .faq-question::after {
-        right: 20px;
-        font-size: 1.2rem;
-    }
-    .faq-answer {
-        padding: 0 20px 20px;
-    }
-}
-/* --- ESTILOS DE LA PÁGINA QUIÉNES SOMOS --- */
+/* --- PÁGINA QUIÉNES SOMOS --- */
 
 .about-section {
     padding: 80px 40px;
@@ -598,7 +769,6 @@ footer{
     margin: 0 auto;
 }
 
-/* Estilos de Bloque Centrado (Inicial y Final) */
 .text-centered {
     text-align: center;
     max-width: 800px;
@@ -635,7 +805,6 @@ footer{
     color: var(--accent-dark);
 }
 
-/* Estilos de Bloques Alternados (Imagen/Texto) */
 .about-block {
     display: flex;
     align-items: center;
@@ -681,44 +850,11 @@ footer{
     color: var(--text);
 }
 
-
-/* Bloque 2: Texto Izquierda / Imagen Derecha (No se necesita row-reverse) */
 .right-image-block {
-    flex-direction: row; /* Asegura que Texto (1º en HTML) va a la izquierda, Imagen (2º) a la derecha */
+    flex-direction: row; 
 }
 
-/* RESPONSIVE */
-@media(max-width: 900px) {
-    .about-section {
-        padding: 50px 20px;
-    }
-    
-    .about-block {
-        /* Apilar en móvil */
-        flex-direction: column; 
-        margin-bottom: 60px;
-        gap: 30px;
-        text-align: center; 
-    }
-
-    .about-text-content h3 {
-        margin-top: 10px;
-        margin-bottom: 15px;
-        display: block; 
-        text-align: center; 
-    }
-    
-    /* Bloque 1 (left-image-block): Imagen, Texto. Usamos column-reverse para obtener Texto (arriba) | Imagen (abajo) */
-    .left-image-block {
-        flex-direction: column-reverse; 
-    }
-
-    /* Bloque 2 (right-image-block): Texto, Imagen. Usamos column para obtener Texto (arriba) | Imagen (abajo) */
-    .right-image-block {
-        flex-direction: column; 
-    }
-}
-/* --- ESTILOS DE LA PÁGINA DE CHECKOUT (REVISADO) --- */
+/* --- PÁGINA DE CHECKOUT --- */
 
 .checkout-section {
     padding: 60px 40px;
@@ -755,7 +891,6 @@ footer{
     padding-bottom: 10px;
 }
 
-/* Estilos del Formulario */
 .shipping-form {
     display: flex;
     flex-wrap: wrap;
@@ -769,19 +904,7 @@ footer{
 .input-group.half-width {
     flex: 1 1 calc(50% - 7.5px); 
 }
-.input-group label {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-.input-group input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
 
-
-/* Estilos del Resumen INTERACTIVO */
 .product-list-summary {
     max-height: 300px;
     overflow-y: auto;
@@ -790,7 +913,6 @@ footer{
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor de un solo ítem interactivo */
 .summary-item-interactive {
     display: flex;
     flex-direction: column;
@@ -803,7 +925,6 @@ footer{
     margin-bottom: 5px;
 }
 
-/* Controles (Cantidad, Precio y Eliminar) */
 .summary-controls {
     display: flex;
     align-items: center;
@@ -811,7 +932,6 @@ footer{
     gap: 10px;
 }
 
-/* Controles de Cantidad (+ / input / -) */
 .quantity-input {
     display: flex;
     align-items: center;
@@ -829,11 +949,6 @@ footer{
     color: var(--brand-dark);
 }
 
-.quantity-input button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
 .quantity-input input {
     width: 40px;
     text-align: center;
@@ -841,23 +956,14 @@ footer{
     padding: 5px 0;
     font-size: 1rem;
     height: 30px;
-    -moz-appearance: textfield; 
 }
 
-.quantity-input input::-webkit-outer-spin-button,
-.quantity-input input::-webkit-inner-spin-button {
-    -webkit-appearance: none; 
-    margin: 0;
-}
-
-/* Precio Total del Ítem */
 .summary-price {
     font-weight: 700;
     width: 80px;
     text-align: right;
 }
 
-/* Botón de eliminación (X) */
 .remove-item-btn {
     background: transparent;
     border: none;
@@ -867,11 +973,7 @@ footer{
     padding: 5px;
     transition: opacity 0.2s;
 }
-.remove-item-btn:hover {
-    opacity: 1;
-}
 
-/* Totales */
 .order-totals {
     margin-top: 15px;
 }
@@ -905,56 +1007,23 @@ footer{
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
 }
-.finish-purchase-btn:hover:not([disabled]) {
-    background-color: #552565;
-    transform: translateY(-1px);
-}
-.finish-purchase-btn[disabled] {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
 
-/* Mensaje de éxito */
 .success-message {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #4CAF50; /* Verde */
+    background: #4CAF50;
     color: white;
     padding: 20px 40px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
     z-index: 1000;
     font-size: 1.3rem;
-    display: none; /* Inicialmente oculto */
+    display: none; 
 }
 
-/* RESPONSIVE */
-@media(max-width: 800px) {
-    .checkout-container {
-        flex-direction: column;
-    }
-    .input-group.half-width {
-        flex: 1 1 100%; /* Ocupa todo el ancho en móvil */
-    }
-}
-@media(max-width: 500px) {
-    .summary-controls {
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-    .summary-price {
-        order: 3; 
-        width: auto;
-        flex-basis: 100%;
-        text-align: left;
-    }
-    .remove-item-btn {
-        padding: 5px 0;
-    }
-}
-/* --- ESTILOS DE LA PÁGINA DE DETALLE DEL PRODUCTO --- */
+/* --- PÁGINA DE DETALLE DEL PRODUCTO --- */
 
 .product-detail-section {
     padding: 60px 40px;
@@ -968,11 +1037,10 @@ footer{
     align-items: flex-start;
 }
 
-/* Bloque Izquierdo: Galería */
 .gallery-block {
     flex: 1;
     max-width: 500px;
-    position: sticky; /* Fija la galería al hacer scroll */
+    position: sticky; 
     top: 20px;
 }
 
@@ -981,12 +1049,6 @@ footer{
     overflow: hidden;
     margin-bottom: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.main-image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 .thumbnail-gallery {
@@ -1009,7 +1071,6 @@ footer{
     transform: scale(1.05);
 }
 
-/* Bloque Derecho: Información */
 .info-block {
     flex: 1;
     padding: 0 20px;
@@ -1021,16 +1082,6 @@ footer{
     margin-bottom: 5px;
 }
 
-.product-sku, .product-weight {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-.product-weight span {
-    font-weight: 600;
-}
-
 .product-price {
     font-size: 2rem;
     font-weight: 700;
@@ -1038,32 +1089,11 @@ footer{
     margin-bottom: 30px;
 }
 
-/* Controles (Talla y Botón) */
 .controls-container {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 20px 0;
     margin-bottom: 30px;
-}
-
-.size-selector-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.size-selector-group label {
-    font-weight: 600;
-}
-
-#size-selector {
-    padding: 8px 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: var(--accent-light);
 }
 
 .add-to-cart-detail-btn {
@@ -1084,277 +1114,126 @@ footer{
     transform: translateY(-2px);
 }
 
-/* Descripción y Guía */
-.detail-description h3 {
-    font-size: 1.3rem;
-    color: var(--brand-dark);
-    margin-top: 25px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--bg-secondary);
+
+/* ======================================= */
+/* === 6. MEDIA QUERIES (RESPONSIVE) === */
+/* ======================================= */
+
+@media (max-width: 1200px) {
+    /* PRODUCTOS: 3 columnas para tabletas grandes */
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px; 
+    }
 }
 
-.detail-description p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.detail-description ul {
-    list-style-type: disc;
-    margin-left: 20px;
-}
-
-/* Mensaje de éxito (usamos la clase de productos) */
-.added-success-message {
-    margin-top: 10px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #4CAF50; 
-    color: white;
-    font-weight: 600;
-}
-
-
-/* RESPONSIVE */
-@media(max-width: 900px) {
+@media (max-width: 900px) {
+    /* CONTACTO: Apilar bloques */
+    .contact-container {
+        flex-direction: column; 
+        gap: 40px;
+    }
+    /* QUIÉNES SOMOS: Apilar bloques y ajustar alineación */
+    .about-block {
+        flex-direction: column; 
+        margin-bottom: 60px;
+        gap: 30px;
+        text-align: center; 
+    }
+    .left-image-block {
+        flex-direction: column-reverse; 
+    }
+    .about-text-content h3 {
+        display: block; 
+        text-align: center; 
+    }
+    /* DETALLE PRODUCTO: Apilar bloques */
     .detail-container {
         flex-direction: column;
         gap: 30px;
     }
-    
     .gallery-block {
         max-width: 100%;
-        position: static; /* Quitar sticky en móvil */
+        position: static; 
     }
-    
     .info-block {
         padding: 0;
     }
 }
-/* ======================================= */
-/* 🏠 ESTILOS DE PORTADA (index.html)      */
-/* ======================================= */
 
-.hero-section {
-    position: relative;
-    height: 85vh; 
-    width: 100%;
-    /* Alineación principal a la izquierda */
-    display: flex;
-    align-items: center; 
-    justify-content: flex-start; 
-    color: white; 
-    overflow: hidden;
-    
-    /* Configuración del VIDEO: Quitamos la propiedad background-image */
-    background-color: #000000; 
-}
 
-/* 🎥 ESTILO CLAVE: Hace que el video MP4 cubra todo el contenedor */
-.hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: 0; /* Capa más baja */
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-}
-
-/* Capa oscura semitransparente (Encima del video) */
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 1; /* Encima del video, debajo del contenido */
-}
-
-/* Contenedor de contenido (Textos y Botones - Encima de todo) */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-    max-width: 800px;
-    /* Alineación de texto y contenido a la izquierda */
-    text-align: left; 
-    margin-right: auto; 
-    margin-left: 5%; 
-}
-
-/* --- TÍTULO PRINCIPAL (DISCOVER THE VOID) --- */
-.hero-main-title {
-    font-size: 1.0rem; 
-    font-weight: bold;
-    letter-spacing: 30px; /* Separación de letras aumentada */
-    margin-bottom: 20px; 
-    text-transform: uppercase;
-}
-
-/* --- SUBTÍTULO (Nuevas camisetas - EL MÁS GRANDE) --- */
-.hero-subtitle {
-    font-size: 3.5rem; 
-    margin-top: 15px; 
-    margin-bottom: 25px; 
-    font-weight: 300;
-}
-
-/* --- DESCRIPCIÓN --- */
-.hero-desc {
-    font-size: 1.5rem; 
-    margin-bottom: 40px;
-    font-style: italic;
-    opacity: 0.9;
-}
-
-/* Contenedor de botones */
-.hero-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start; 
-    flex-wrap: wrap; 
-}
-
-/* Estilos de botones BASE */
-.hero-btn {
-    padding: 15px 30px;
-    border: 2px solid;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    text-decoration: none;
-}
-
-/* ======================================= */
-/* 🎨 ESTILOS DE BOTONES PERSONALIZADOS (Rellenos) */
-/* ======================================= */
-
-/* Botón "Medieval by Ckidd" (Relleno Marrón/Rojo) */
-.btn-ckidd {
-    background-color: #6e2c15; /* Último color especificado */
-    border-color: #6e2c15; 
-	border-radius: 12px;
-    color: white; 
-}
-
-.btn-ckidd:hover {
-    background-color: transparent; 
-    color: #ff4500; 
-    border-color: #ff4500;
-}
-
-/* Botón "Update" (Relleno Morado de la marca) */
-.btn-update {
-    background-color: #6e2d81; 
-    border-color: #6e2d81;
-	border-radius: 12px;
-    color: white; 
-}
-
-.btn-update:hover {
-    background-color: transparent; 
-    color: #6e2d81; 
-    border-color: #6e2d81;
-}
-
-/* ======================================= */
-/* 🛒 ESTILOS DE SECCIONES DESTACADAS     */
-/* ======================================= */
-
-.featured-products {
-    width: 90%;
-    max-width: 1200px;
-    margin: 60px auto; 
-}
-
-.feature-block {
-    display: flex;
-    align-items: center; 
-    margin-bottom: 80px; 
-    gap: 40px; 
-}
-
-.feature-image {
-    flex: 1; 
-    min-width: 0;
-}
-
-.feature-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.feature-text {
-    flex: 1; 
-    padding: 20px;
-}
-
-.feature-text h3 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: #6e2d81; /* Morado de la marca */
-}
-
-.feature-text p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-/* Enlace de llamada a la acción dentro del bloque de texto */
-.cta-link {
-    color: #ff4500; 
-    font-weight: bold;
-    text-decoration: none;
-    border-bottom: 2px solid #ff4500;
-    padding-bottom: 2px;
-    transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.cta-link:hover {
-    color: #6e2d81; 
-    border-bottom-color: #6e2d81; /* Cambio de color del subrayado */
-}
-
-/* AJUSTE PARA EL BLOQUE 2 (Imagen a la derecha) */
-.feature-right-image {
-    flex-direction: row-reverse; /* Esto asegura la alternancia: Imagen a la derecha, Texto a la izquierda */
-}
-
-/* Bloque final de llamada a la acción */
-.explore-cta {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    margin-top: 50px;
-}
-
-.explore-cta h3 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.explore-cta p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-/* ======================================= */
-/* 📱 AJUSTES PARA MÓVILES                */
-/* ======================================= */
 @media (max-width: 768px) {
-    /* Ajustes para la portada */
+    /* ---------------------------------------------------- */
+    /* === HEADER Y NAVEGACIÓN (MÓVIL) === */
+    /* ---------------------------------------------------- */
+    header {
+        padding: 20px;
+        justify-content: space-between; 
+        gap: 0; 
+    }
+    .logo-link img.logo { height: 60px; }
+
+    /* Muestra el botón hamburguesa */
+    .hamburger-btn {
+        display: flex;
+    }
+
+    /* **ESTILOS DEL MENÚ MÓVIL (GLASSMORHPISM)** */
+    .nav-container {
+        /* Oculto por defecto */
+        display: none !important; 
+        
+        position: fixed;
+        top: 0;
+        right: 0; /* Menú desliza desde la derecha */
+        left: auto;
+        width: 80%; 
+        height: 100vh;
+        min-height: 100vh;
+        
+        /* Glassmorphism Override (Fondo más oscuro, más blur) */
+        background-color: rgba(0, 0, 0, 0.7); 
+        backdrop-filter: blur(8px); 
+        -webkit-backdrop-filter: blur(8px);
+        
+        /* Estilos de layout */
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 80px; 
+        padding-left: 30px;
+        border: none;
+        box-shadow: none;
+        
+        z-index: 999;
+        overflow-y: auto;
+    }
+    
+    /* Clase que muestra el menú (Activada con JavaScript) */
+    .nav-container.open {
+        display: flex !important; 
+    }
+
+    /* Estilo para los enlaces en el menú móvil */
+    .nav-container a {
+        display: block;
+        color: var(--accent-light);
+        text-align: left;
+        padding: 15px 10px;
+        font-size: 1.2em;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+        background: none;
+        transform: none;
+    }
+    .nav-container a:hover {
+        background-color: rgba(255, 255, 255, 0.1); 
+    }
+    
+    /* ---------------------------------------------------- */
+    /* === OTROS AJUSTES GENERALES === */
+    /* ---------------------------------------------------- */
+
+    /* HERO SECTION */
     .hero-main-title { font-size: 1rem; letter-spacing: 15px; } 
     .hero-subtitle { font-size: 2.5rem; }
     .hero-desc { font-size: 1.2rem; }
@@ -1365,199 +1244,14 @@ footer{
         align-items: flex-start;
     }
     
-    /* Ajustes para productos destacados */
-    .feature-block, .feature-right-image {
-        flex-direction: column; /* Apilamos la imagen y el texto verticalmente */
-    }
-    
-    .feature-text {
-        padding: 0;
-        text-align: center;
-    }
-    
-    .feature-text h3 {
-        margin-top: 20px;
-    }
-    
-    .cta-link {
-        display: inline-block;
-    }
-}
-/* --- ESTILOS DEL POPUP DE COOKIES --- */
-
-.cookie-consent-bar {
-    /* Fija el popup en la parte inferior de la ventana */
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    
-    /* Estilos visuales */
-    background-color: var(--brand-dark); /* Fondo oscuro (casi negro) */
-    color: var(--accent-light);          /* Texto claro */
-    padding: 15px 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    z-index: 10000; /* Debe estar por encima de todos los demás elementos fijos (header, footer) */
-    
-    /* Estado inicial: oculto (se mostrará con JS si es necesario) */
-    display: none; 
-}
-
-.cookie-consent-bar p {
-    margin: 0;
-    font-size: 0.95rem;
-    max-width: 800px;
-    text-align: center;
-}
-
-.cookie-accept-btn {
-    /* Botón de Aceptar con el color de acento morado */
-    background-color: var(--accent-dark); 
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-    flex-shrink: 0; /* Evita que el botón se encoja */
-}
-
-.cookie-accept-btn:hover {
-    background-color: #552467; /* Un tono un poco más oscuro al pasar el ratón */
-}
-/*-yoloo
-/* Ocultar el botón de hamburguesa por defecto */
-.hamburger-btn {
-    display: none;
-}
-/* ======================================= */
-/* RESPONSIVE */
-/* ======================================= */
-@media(max-width: 800px){
-    /* HEADER & NAV CORRECCIÓN */
-@media (max-width: 768px) {
-    /* **ESTILOS DEL HEADER** (Ajustados de tu código) */
-    .site-header {
-        /* Aseguramos que el header sea un contenedor flexible para alinear logo, botón y carrito */
-        display: flex; 
-        align-items: center;
-        padding: 20px;
-        justify-content: space-between; 
-        gap: 0; 
-    }
-    .logo-link img.logo { height: 60px; }
-
-
-    /* **ESTILOS DEL BOTÓN HAMBURGUESA** */
-    .hamburger-btn {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width: 30px;
-        height: 25px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        z-index: 1000; /* Siempre encima del menú */
-    }
-
-    .hamburger-btn .bar {
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: #333; /* Color de las barras */
-        border-radius: 3px;
-        transition: all 0.3s ease-in-out;
-    }
-
-    /* **ANIMACIÓN (TRANSFORMACIÓN A 'X')** */
-    .hamburger-btn.open .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
-    .hamburger-btn.open .bar:nth-child(2) { opacity: 0; }
-    .hamburger-btn.open .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
-
-
-    /* **ESTILOS DEL MENÚ COMPLETO (OCULTO POR DEFECTO)** */
-.nav-container {
-        display: none !important; 
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        
-        /* ---------------------------------------------------- */
-        /* ✨ NUEVOS ESTILOS PARA EL EFECTO CRISTAL ✨ */
-        /* ---------------------------------------------------- */
-        /* 1. Fondo semitransparente (Necesario para que el filtro funcione) */
-        background-color: rgba(0, 0, 0, 0.7); 
-        
-        /* 2. Propiedad de filtro (Añade el desenfoque) */
-        backdrop-filter: blur(8px); 
-        -webkit-backdrop-filter: blur(8px); /* Para compatibilidad con Safari */
-        /* ---------------------------------------------------- */
-        
-        padding-top: 80px; 
-        z-index: 999;
-        overflow-y: auto;
-    }
-
-    /* **ESTILO DEL MENÚ CUANDO ESTÁ ABIERTO** */
-    .nav-container.open {
-        display: flex !important; 
-    }
-
-    /* Estilo para los enlaces dentro del menú móvil (todos visibles) */
-    .nav-container a {
-        display: block !important;
-        color: white;
-        text-align: center;
-        padding: 15px 20px;
-        font-size: 1.2em;
-        width: 100%;
-        /* Opcional: Para mejorar la legibilidad sobre el fondo desenfocado, podrías añadir un borde o sombra sutil */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-    }
-    
-    /* **OTROS ESTILOS DEL USUARIO** (Mantenidos) */
-
-    /* Ajustar la burbuja del carrito */
-    .cart-bubble{
-        padding: 6px 10px;
-        font-size: 0.9rem;
-    }
-    .cart-bubble img{ height: 22px; }
-
-    /* HERO SECTION */
-    .hero-section{
-        height: 80vh; 
-    }
-    .main-title{
-        font-size: 3rem;
-        letter-spacing: 0.4rem;
-    }
-    .main-subtitle{
-        font-size: 1.2rem;
-    }
-    
-    /* CARDS SECTION */
-    .cards-section{
-        padding: 40px 20px;
-    }
-    .cards-title{
-        font-size: 2rem;
-    }
-    .card-grid{
-        grid-template-columns: 1fr; /* Una columna en móvil */
+    /* PRODUCTOS: 2 columnas */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
     
     /* FOOTER */
+    footer{ padding: 30px 20px; }
     .footer-container{ flex-direction: column; align-items: flex-start; }
     .footer-links-grid{ 
         flex-direction: column;
@@ -1567,41 +1261,53 @@ footer{
     .footer-right {
         width: 100%;
         margin-top: 20px;
+        align-items: flex-start;
     }
-    .newsletter {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    .newsletter input {
+    .newsletter input, .newsletter button {
         width: 100%;
         margin-right: 0;
     }
-    .newsletter button {
-        width: 100%;
-    }
-    .instagram {
-        justify-content: flex-start;
-        margin-top: 15px;
-    }
-    .discover{
-        font-size: 1.8rem; 
-        letter-spacing: 5px; 
-        margin-top: 30px;
-        padding: 0 10px;
-    }
+    .instagram { justify-content: flex-start; margin-top: 15px; }
+    .discover{ font-size: 1.8rem; letter-spacing: 5px; margin-top: 30px; }
 
-    /* RESPONSIVE DE COOKIE BAR */
+    /* CHECKOUT: Apilar bloques y ocupar todo el ancho */
+    .checkout-container {
+        flex-direction: column;
+    }
+    .input-group.half-width {
+        flex: 1 1 100%; 
+    }
+    
+    /* COOKIE BAR */
     .cookie-consent-bar {
         flex-direction: column;
         gap: 10px;
         padding: 15px 15px;
     }
-    .cookie-consent-bar p {
-        font-size: 0.9rem;
-    }
     .cookie-accept-btn {
         width: 100%;
         max-width: 300px;
+    }
+}
+
+@media (max-width: 500px) {
+    /* PRODUCTOS: 1 columna */
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    /* CONTACTO: Ocupar todo el ancho */
+    .input-group {
+        flex: 1 1 100%; 
+    }
+    /* CHECKOUT: Mejorar control de cantidad en lista de resumen */
+    .summary-controls {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .summary-price {
+        order: 3; 
+        width: auto;
+        flex-basis: 100%;
+        text-align: left;
     }
 }
