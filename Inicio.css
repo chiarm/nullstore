@@ -1528,6 +1528,14 @@ footer{
     .nav-container{ 
         display: none; 
     }
+	
+	.nav-container a[href*="productos.html"] { 
+    display: block; 
+    /* Estilos para el enlace visible */
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    flex-shrink: 0;
+  }
     
     /* Ajustar la burbuja del carrito */
     .cart-bubble{
