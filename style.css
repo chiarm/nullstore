@@ -53,7 +53,7 @@ canvas {
     text-indent: 4px; 
     line-height: 14px; 
     padding-bottom: 2px; 
-    font-family: Helvetica, Arial, sans-serif; 
+    font-family: Montserrat, system-ui, Montserrat; 
     font-weight: bold; 
     z-index: 9999; /* Alto para que sea visible */
 } 
@@ -1582,6 +1582,10 @@ footer{
 /* ======================================= */
 /* RESPONSIVE */
 /* ======================================= */
+/* Ocultar el botón de hamburguesa por defecto */
+.hamburger-btn {
+    display: none;
+}
 @media(max-width: 800px){
     /* HEADER & NAV CORRECCIÓN */
 @media (max-width: 768px) {
