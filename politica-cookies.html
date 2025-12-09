@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Política de Cookies - Thenullstore</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="legal.css">
 		<link rel="icon" type="svg+xml" href="Logo.svg">
 </head>
 <body>
@@ -118,6 +118,93 @@
         </div>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // Inicialización de Particles.js
+    // Esto asegura que el fondo de partículas funcione en todas las páginas
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: true, mode: 'bubble' },
+                onclick: { enable: true, mode: 'repulse' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    // Función de actualización necesaria para particles.js (simplificada)
+    var count_particles, stats, update;
+    // La línea stats = new Stats() y las siguientes pueden eliminarse si no usas el monitor de rendimiento Stats.js
+    // Si solo usas particles.js, puedes dejar solo la función de actualización mínima:
+    /*
+    update = function () {
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+    */
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Asegúrate de que el ID de la barra de cookies sea correcto
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.querySelector('.nav-container');
+        const body = document.body;
+
+        // Lógica de Cookies
+        // La barra de cookies solo debe mostrarse si no se ha aceptado antes
+        if (popup) {
+            const consentGiven = localStorage.getItem('cookies_accepted');
+            if (!consentGiven) { popup.style.display = 'flex'; }
+
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', () => {
+                    localStorage.setItem('cookies_accepted', 'true');
+                    popup.style.display = 'none';
+                });
+            }
+        }
+
+
+        // Lógica del Menú Móvil (Hamburguesa)
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                // Alterna las clases para abrir/cerrar el menú y bloquear el scroll
+                toggleBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                body.classList.toggle('menu-active');
+            });
+            
+            // Cierra el menú al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
 <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
 <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
 

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Nullstore - Camiseta Eyes</title>
 	<link rel="icon" type="svg+xml" href="Logo.svg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="detallesproductos.css">
 </head>
 <body>
 
 <header class="site-header">
     <a href="index.html" class="logo-link">
-        <img src="logo.svg" alt="Logo" class="logo">
+        <img src="Logo.svg" alt="Logo" class="logo">
     </a>
 
     <nav class="nav-container">
@@ -217,5 +217,18 @@
     <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
     <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
 </div>
+<script src="particles.min.js"></script>
+
+<script>
+    // ===================================
+    // 1. PARTICLES.JS (Efecto de Fondo)
+    // ===================================
+    document.addEventListener('DOMContentLoaded', () => {
+        // Carga la configuración de partículas desde 'assets/particlesjs-config.json'
+        particlesJS.load('particles-js', 'assets/particlesjs-config.json', function() {
+            console.log('particles.js loaded - callback');
+        });
+    });
+</script>
 </body>
 </html>
