@@ -343,5 +343,192 @@
         }
     });
 </script>
+<script>
+    // --- Variables Globales ---
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const SHIPPING_COST = 5.00; 
+    
+    // --- Funciones del Carrito ---
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        // Mostrar la cantidad de artículos en el carrito
+        cartBubbleSpan.textContent = `Carrito (${cart.length})`; 
+    }
+
+    // 1. Lógica de la Galería de Imágenes
+    function setupGallery() {
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const newSrc = thumbnail.dataset.image;
+                mainImage.src = newSrc;
+                
+                // Actualizar la clase 'active' para el estilo de miniatura seleccionada
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+        });
+    }
+
+    // 2. Lógica de Añadir al Carrito
+    function addToCartDetail() {
+        const name = document.getElementById('product-name').textContent;
+        const priceElement = document.querySelector('.product-price');
+        const price = parseFloat(priceElement.dataset.price); 
+        const successMessage = document.getElementById('added-message');
+
+        const item = {
+            name: name,
+            price: price,
+            units: 1 
+        };
+
+        cart.push(item);
+        saveCart();
+        updateCartCount();
+
+        // Mostrar notificación de éxito
+        successMessage.textContent = `✅ "${name}" añadido al carrito.`;
+        successMessage.style.display = 'block';
+        
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+        
+        const cartBubble = document.querySelector('.cart-bubble');
+        cartBubble.classList.add('flash-cart'); 
+        setTimeout(() => {
+            cartBubble.classList.remove('flash-cart');
+        }, 500);
+    }
+    
+    // 3. Lógica del Menú Móvil y Cookies (DOM Content Loaded)
+    document.addEventListener('DOMContentLoaded', () => {
+        setupGallery();
+        updateCartCount();
+
+        // Event listener para el botón "Añadir al Carrito"
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', addToCartDetail);
+        }
+
+        // Hacemos que la burbuja del carrito navegue a la página de checkout
+        document.querySelector('.cart-bubble').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        // --- INICIO LÓGICA DE MENÚ MÓVIL (CORREGIDA) ---
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu'); // Selector por ID
+        const body = document.body;
+
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open'); // Activa animación 'X'
+                mobileMenu.classList.toggle('open'); // Muestra/esconde el menú
+                body.classList.toggle('menu-active'); // Previene el scroll del fondo
+            });
+            // Cerrar menú al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+        // --- FIN LÓGICA DE MENÚ MÓVIL ---
+
+        // --- INICIO LÓGICA DE COOKIES (CONSOLIDADA) ---
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const consentGiven = localStorage.getItem('cookies_accepted');
+
+        if (!consentGiven && popup) { 
+            popup.style.display = 'flex'; 
+        }
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookies_accepted', 'true');
+                popup.style.display = 'none';
+            });
+        }
+        // --- FIN LÓGICA DE COOKIES ---
+    });
+</script>
+
+<script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: "#6e2d81" },
+            shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 }
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 2, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "bubble" },
+                onclick: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    var count_particles, stats, update;
+    stats = new Stats();
+    stats.setMode(0);
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.left = "0px";
+    stats.domElement.style.top = "0px";
+    // Nota: El script original del slider/rotating image se ha omitido ya que no existe un elemento <img> para él en esta página de detalle.
+</script>
 </body>
 </html>
