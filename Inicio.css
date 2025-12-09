@@ -1514,3 +1514,27 @@ footer{
       font-size: 1.4rem; /* Reducir tamaño de subtítulos */
   }
 }
+/* RESPONSIVE */
+@media(max-width: 800px){
+    header{
+        padding: 20px;
+        /* Cambiado de justify-content: center (escritorio) a space-between (móvil) */
+        justify-content: space-between; 
+        gap: 0; /* Quitar el gap fijo de 180px */
+    }
+    .logo-link img.logo { height: 60px; }
+    
+    /* Ocultar el menú principal en móvil */
+    .nav-container{ 
+        display: none; 
+    }
+    
+    /* Ajustar la burbuja del carrito */
+    .cart-bubble{
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .cart-bubble img{ height: 22px; }
+    
+    /* ... (resto de las reglas responsive específicas de Inicio.css) ... */
+}
