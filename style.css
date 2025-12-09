@@ -1539,3 +1539,46 @@ footer{
     text-decoration: underline;
     font-weight: 600;
 }
+/* ... (resto del CSS) ... */
+
+/* RESPONSIVE */
+@media(max-width: 800px){
+  header{ 
+    padding: 20px; 
+    justify-content: space-between;
+    gap: 0;
+  }
+  .logo-link img.logo{ height: 60px; } 
+  /* ... (otras reglas existentes) ... */
+  
+  .footer-container{ flex-direction: column; align-items: flex-start; }
+  .footer-links-grid{ 
+    flex-direction: column;
+    gap: 20px; 
+  }
+  .discover{
+    font-size: 1.8rem; 
+    letter-spacing: 5px; 
+    margin-top: 30px;
+    padding: 0 10px;
+  }
+  
+  /* --- RESPONSIVE PARA PÁGINAS LEGALES --- */
+  .legal-section {
+      /* Reducir el padding lateral de 40px a 20px */
+      padding: 80px 20px; 
+  }
+
+  .legal-title {
+      font-size: 1.8rem; /* Reducir tamaño del título principal */
+  }
+
+  .website-domain {
+      font-size: 1rem; /* Reducir tamaño del dominio */
+      margin-bottom: 25px;
+  }
+
+  .legal-block h3 {
+      font-size: 1.4rem; /* Reducir tamaño de subtítulos */
+  }
+}
