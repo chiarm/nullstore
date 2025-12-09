@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nullstore - Grinder</title>
+	<link rel="icon" type="svg+xml" href="Logo.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="logo-link">
+        <img src="logo.svg" alt="Logo" class="logo">
+    </a>
+
+    <nav class="nav-container">
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+    </nav>
+
+    <div class="cart-bubble">
+        <img src="Carrito.svg" alt="Carrito">
+        <span>Carrito</span>
+    </div>
+</header>
+
+<main>
+    <section class="product-detail-section">
+        <div class="detail-container">
+            
+            <div class="gallery-block">
+                <div class="main-image-container">
+                    <img src="img/pegatinas.jpg" alt="Totebag de Florecitas" id="main-product-image">
+                </div>
+                <div class="thumbnail-gallery">
+                    <img src="img/pegatinas.jpg" alt="Miniatura 1" class="thumbnail active" data-image="img/pegatinas.jpg">
+                </div>
+            </div>
+
+            <div class="info-block">
+                <h1 id="product-name">Pack de pegatinas</h1>
+                <p class="product-sku">Ref: Pegatinas</p>
+                <p class="product-weight">Peso (Estimado): <span id="product-weight-value">0.1 kg</span></p>
+                
+                <h2 class="product-price" data-price="3.95">3,95 €</h2>
+
+                <div class="controls-container">
+                    <button id="add-to-cart-btn" class="add-to-cart-detail-btn">
+                        Añadir al Carrito
+                    </button>
+                    <div id="added-message" class="added-success-message" style="display:none;"></div>
+                </div>
+
+                <div class="detail-description">
+                    <h3>Descripción del Producto</h3>
+                    <p>¿Cansado de tener que picar el cilantro del guacamole a mano? ¿Siempre se te quedan ramitas del orégano sobre el tomate de tus queridos macarrones? ¡Presentamos nuestro Grinder! Fabricado en metal (aleación de zinc) con un tamaño de 55 mm de diámetro, con una impresión realizada con láser y presentado en una cajita de cartoncillo. El diseño es un homenaje al inicio de Nullstore, el alien que representaba a la marca.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links-grid">
+            <div class="col-legal">
+                <a href="politica-privacidad.html">Política de privacidad</a>
+                <a href="aviso-legal.html">Aviso legal</a>
+                <a href="devoluciones-reenvio.html">Devoluciones y reenvío</a>
+            </div>
+            <div class="col-ayuda">
+                <a href="contacto.html">Contacto</a>
+                <a href="quienes-somos.html">Quiénes somos</a>
+                <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="newsletter">
+                <p>¿Odias perderte cosas?</p>
+                <p>Novedades, secretos y descuentos. Cero <i>spam</i>, prometido.</p>
+                <input type="email" placeholder="Tu correo">
+                <button>Enviar</button>
+            </div>
+            <div class="instagram">
+                <img src="instagram.png" alt="Instagram">
+                <a href="https://www.instagram.com/thenullstore/" target="_blank">Síguenos</a>
+            </div>
+        </div>
+    </div>
+    <div class="discover">DISCOVER THE VOID</div>
+</footer>
+
+<script>
+    // --- Lógica del Carrito y Galería ---
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+    function updateCartCount() {
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        cartBubbleSpan.textContent = `Carrito (${cart.length})`;
+    }
+
+    // 1. Lógica de la Galería de Imágenes
+    function setupGallery() {
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const newSrc = thumbnail.dataset.image;
+                mainImage.src = newSrc;
+                
+                // Actualizar la clase 'active'
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+        });
+    }
+
+    // 2. Lógica de Añadir al Carrito (sin incluir Talla)
+    function addToCartDetail() {
+        const name = document.getElementById('product-name').textContent;
+        const priceElement = document.querySelector('.product-price');
+        // El precio está guardado en el atributo data-price
+        const price = parseFloat(priceElement.dataset.price); 
+        // La talla seleccionada se ignora para la lógica del carrito, solo es visual.
+        // const size = document.getElementById('size-selector').value; 
+        const successMessage = document.getElementById('added-message');
+
+        const item = {
+            name: name, // El nombre NO incluye la talla
+            price: price,
+            units: 1 
+            // La talla NO se guarda en el objeto
+        };
+
+        cart.push(item);
+        saveCart();
+        updateCartCount();
+
+        // Mostrar notificación de éxito (sin talla)
+        successMessage.textContent = `✅ "${name}" añadido al carrito.`;
+        successMessage.style.display = 'block';
+        
+        // Ocultar notificación después de 3 segundos
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+        
+        // Opcional: Resaltar burbuja del carrito
+        const cartBubble = document.querySelector('.cart-bubble');
+        cartBubble.classList.add('flash-cart'); 
+        setTimeout(() => {
+            cartBubble.classList.remove('flash-cart');
+        }, 500);
+    }
+    
+    // Inicialización al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+        setupGallery();
+        updateCartCount(); // Cargar el contador del carrito
+
+        // Event listener para el botón "Añadir al Carrito"
+        document.getElementById('add-to-cart-btn').addEventListener('click', addToCartDetail);
+
+        // Hacemos que la burbuja del carrito navegue a la página de checkout
+        document.querySelector('.cart-bubble').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+
+        // 1. Verificar si el usuario ya aceptó las cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+
+        if (!consentGiven) {
+            // 2. Si NO ha aceptado, mostramos el popup
+            popup.style.display = 'flex';
+        }
+
+        // 3. Agregar el listener al botón para aceptar
+        acceptBtn.addEventListener('click', () => {
+            // Guardar la preferencia en el navegador
+            localStorage.setItem('cookies_accepted', 'true');
+            // Ocultar el popup
+            popup.style.display = 'none';
+        });
+    });
+</script>
+<div id="cookie-popup" class="cookie-consent-bar">
+    <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
+    <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle del Producto - Camiseta Astro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="logo-link">
+        <img src="logo.svg" alt="Logo" class="logo">
+    </a>
+
+    <nav class="nav-container">
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+        <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+    </nav>
+
+    <div class="cart-bubble">
+        <img src="Carrito.svg" alt="Carrito">
+        <span>Carrito</span>
+    </div>
+</header>
+
+<main>
+    <section class="product-detail-section">
+        <div class="detail-container">
+            
+            <div class="gallery-block">
+                <div class="main-image-container">
+                    <img src="img/producto1_main.jpg" alt="Camiseta Astro principal" id="main-product-image">
+                </div>
+                <div class="thumbnail-gallery">
+                    <img src="img/producto1_main.jpg" alt="Miniatura 1" class="thumbnail active" data-image="img/producto1_main.jpg">
+                    <img src="img/producto1_vista2.jpg" alt="Miniatura 2" class="thumbnail" data-image="img/producto1_vista2.jpg">
+                    <img src="img/producto1_detalle.jpg" alt="Miniatura 3" class="thumbnail" data-image="img/producto1_detalle.jpg">
+                </div>
+            </div>
+
+            <div class="info-block">
+                <h1 id="product-name">Camiseta "Astro Explorer"</h1>
+                <p class="product-sku">Ref: ASTRO-001</p>
+                <p class="product-weight">Peso (Estimado): <span id="product-weight-value">0.2 kg</span></p>
+                
+                <h2 class="product-price" data-price="29.99">29,99 €</h2>
+
+                <div class="controls-container">
+                    
+                    <div class="size-selector-group">
+                        <label for="size-selector">Selecciona la Talla:</label>
+                        <select id="size-selector">
+                            <option value="S">S</option>
+                            <option value="M" selected>M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <button id="add-to-cart-btn" class="add-to-cart-detail-btn">
+                        Añadir al Carrito
+                    </button>
+                    <div id="added-message" class="added-success-message" style="display:none;"></div>
+                </div>
+
+                <div class="detail-description">
+                    <h3>Descripción del Producto</h3>
+                    <p>Esta camiseta está confeccionada con algodón orgánico de alta calidad, garantizando comodidad y durabilidad. El diseño "Astro Explorer" captura la mística del espacio exterior con un estampado vibrante que no se desvanece. Perfecta para el día a día o para tu próxima aventura interestelar.</p>
+
+                    <h3>Guía de Tallas</h3>
+                    <p>Nuestras tallas son estándar europeas. Si dudas entre dos tallas, te recomendamos elegir la superior para un ajuste más holgado.</p>
+                    <ul>
+                        <li>**S:** Pecho: 92cm, Largo: 70cm</li>
+                        <li>**M:** Pecho: 98cm, Largo: 72cm</li>
+                        <li>**L:** Pecho: 104cm, Largo: 74cm</li>
+                        <li>**XL:** Pecho: 110cm, Largo: 76cm</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links-grid">
+            <div class="col-legal">
+                <a href="politica-privacidad.html">Política de privacidad</a>
+                <a href="aviso-legal.html">Aviso legal</a>
+                <a href="devoluciones-reenvio.html">Devoluciones y reenvío</a>
+            </div>
+            <div class="col-ayuda">
+                <a href="contacto.html">Contacto</a>
+                <a href="quienes-somos.html">Quiénes somos</a>
+                <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="newsletter">
+                <p>Suscríbete a nuestra newsletter</p>
+                <input type="email" placeholder="Tu correo">
+                <button>Enviar</button>
+            </div>
+            <div class="instagram">
+                <img src="instagram.png" alt="Instagram">
+                <a href="https://www.instagram.com/" target="_blank">Síguenos</a>
+            </div>
+        </div>
+    </div>
+    <div class="discover">DISCOVER THE VOID</div>
+</footer>
+
+<script>
+    // --- Lógica del Carrito y Galería ---
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+    function updateCartCount() {
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        cartBubbleSpan.textContent = `Carrito (${cart.length})`;
+    }
+
+    // 1. Lógica de la Galería de Imágenes
+    function setupGallery() {
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const newSrc = thumbnail.dataset.image;
+                mainImage.src = newSrc;
+                
+                // Actualizar la clase 'active'
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+        });
+    }
+
+    // 2. Lógica de Añadir al Carrito (sin incluir Talla)
+    function addToCartDetail() {
+        const name = document.getElementById('product-name').textContent;
+        const priceElement = document.querySelector('.product-price');
+        // El precio está guardado en el atributo data-price
+        const price = parseFloat(priceElement.dataset.price); 
+        // La talla seleccionada se ignora para la lógica del carrito, solo es visual.
+        // const size = document.getElementById('size-selector').value; 
+        const successMessage = document.getElementById('added-message');
+
+        const item = {
+            name: name, // El nombre NO incluye la talla
+            price: price,
+            units: 1 
+            // La talla NO se guarda en el objeto
+        };
+
+        cart.push(item);
+        saveCart();
+        updateCartCount();
+
+        // Mostrar notificación de éxito (sin talla)
+        successMessage.textContent = `✅ "${name}" añadido al carrito.`;
+        successMessage.style.display = 'block';
+        
+        // Ocultar notificación después de 3 segundos
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+        
+        // Opcional: Resaltar burbuja del carrito
+        const cartBubble = document.querySelector('.cart-bubble');
+        cartBubble.classList.add('flash-cart'); 
+        setTimeout(() => {
+            cartBubble.classList.remove('flash-cart');
+        }, 500);
+    }
+    
+    // Inicialización al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+        setupGallery();
+        updateCartCount(); // Cargar el contador del carrito
+
+        // Event listener para el botón "Añadir al Carrito"
+        document.getElementById('add-to-cart-btn').addEventListener('click', addToCartDetail);
+
+        // Hacemos que la burbuja del carrito navegue a la página de checkout
+        document.querySelector('.cart-bubble').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+    });
+</script>
+
+</body>
+</html>
