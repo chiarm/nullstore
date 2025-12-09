@@ -22,7 +22,6 @@
         <span class="bar"></span>
     </button>
     
-    <div class="nav-right"> 
         <nav class="nav-container" id="mobile-menu">
             <a href="productos.html">Productos</a>
             <a href="contacto.html">Contacto</a>
@@ -226,18 +225,18 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- 1. LÓGICA DEL MENÚ MÓVIL ---
+
+        // --- 1. LÓGICA DEL MENÚ MÓVIL (CORREGIDA) ---
         const toggleBtn = document.getElementById('menu-toggle-btn');
-        const mobileMenu = document.getElementById('mobile-menu'); // Busca el ID 'mobile-menu'
+        const mobileMenu = document.getElementById('mobile-menu');
         const body = document.body;
 
         if (toggleBtn && mobileMenu) {
             toggleBtn.addEventListener('click', () => {
-                toggleBtn.classList.toggle('open');       // Anima el botón a X
-                mobileMenu.classList.toggle('open');      // Muestra el menú (CSS display:flex)
-                body.classList.toggle('menu-active');     // Bloquea el scroll del fondo
+                toggleBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                body.classList.toggle('menu-active');
             });
-
             // Cerrar menú al hacer clic en un enlace
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
@@ -246,11 +245,36 @@
                     body.classList.remove('menu-active');
                 });
             });
-        } else {
-            console.error("Error: No se encontró el botón o el menú. Revisa los IDs en el HTML.");
         }
 
-        // --- 2. LÓGICA DEL CARRITO (BÁSICA) ---
+        // --- 2. LÓGICA DEL SLIDER ROTATORIO (NUEVO) ---
+        const image = document.getElementById('rotating-image');
+        // Asegúrate de que tienes las imágenes 'slider1.jpg' y 'slider2.jpg' en la carpeta 'img'
+        const images = ['img/slider1.jpg', 'img/slider2.jpg']; 
+        let currentIndex = 0;
+
+        if (image) {
+            function rotateImage() {
+                // Calcula el siguiente índice (0 -> 1 o 1 -> 0)
+                currentIndex = (currentIndex + 1) % images.length;
+                
+                // Paso 1: Opacidad 0 (para iniciar la transición CSS de desvanecimiento)
+                image.style.opacity = 0; 
+
+                // Espera el tiempo de la transición CSS (0.5s)
+                setTimeout(() => {
+                    // Paso 2: Cambia la fuente de la imagen
+                    image.src = images[currentIndex];
+                    // Paso 3: Opacidad 1 (para iniciar la transición CSS de aparición)
+                    image.style.opacity = 1; 
+                }, 500); 
+            }
+
+            // Cambia la imagen cada 5000 milisegundos (5 segundos)
+            setInterval(rotateImage, 5000); 
+        }
+
+        // --- 3. LÓGICA BÁSICA DEL CARRITO ---
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartBubbleSpan = document.querySelector('.cart-bubble span');
         if (cartBubbleSpan) {
