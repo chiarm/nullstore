@@ -135,7 +135,7 @@ body.menu-active {
 }
 
 /* ========================================== */
-/* === 2. BOTÓN HAMBURGUESA (MÓVIL) === */
+/* === 2. BOTÓN HAMBURGUESA (BASE) === */
 /* ========================================== */
 
 .hamburger-btn {
@@ -154,7 +154,7 @@ body.menu-active {
     display: block;
     width: 100%;
     height: 3px; 
-    background-color: var(--accent-light); /* Color claro sobre fondo oscuro del header */
+    background-color: var(--accent-light); 
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
     margin: 5px 0; 
@@ -234,7 +234,7 @@ body.menu-active {
     flex-direction: column;
     text-align: left;
     
-    /* MODIFICACIÓN: Altura fija en desktop (Requisito 1) */
+    /* ESCRITORIO: Altura fija para uniformidad */
     height: 480px; 
 }
 
@@ -248,7 +248,6 @@ body.menu-active {
     color: inherit; 
     display: block; 
     flex-grow: 1;
-    /* NUEVO: Para asegurar que el contenido se estire dentro de la altura fija */
     display: flex;
     flex-direction: column;
 }
@@ -271,7 +270,6 @@ body.menu-active {
 
 .product-info {
     padding: 15px;
-    /* NUEVO: Permite que el bloque de información use el espacio restante */
     flex-grow: 1; 
     display: flex;
     flex-direction: column;
@@ -455,120 +453,163 @@ footer {
 /* === 6. MEDIA QUERIES (RESPONSIVE) === */
 /* ======================================= */
 
-/* NUEVO: AJUSTE para tabletas y teléfonos (Máx. 1024px) */
+/* --- TABLETS (801px - 1024px) --- */
 @media (max-width: 1024px) {
-    /* Requisito 2: Cambiar a 1 columna en tabletas y móviles */
+    /* 2 Columnas para tablets */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* Altura automática en pantallas medianas */
+    .product-card {
+        height: auto; 
+    }
+}
+
+/* --- MÓVILES (Max 800px) --- */
+@media (max-width: 800px) {
+    
+    /* -- Header y Menú Móvil -- */
+    .site-header {
+        padding: 20px;
+        justify-content: space-between; 
+        gap: 0;
+    }
+
+    .hamburger-btn {
+        display: block; 
+    }
+
+    .nav-container {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        top: 0; 
+        right: 0;
+        width: 80%; 
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7); 
+        backdrop-filter: blur(8px); 
+        -webkit-backdrop-filter: blur(8px); 
+        flex-direction: column; 
+        align-items: flex-start;
+        padding-top: 80px; 
+        padding-left: 30px;
+        z-index: 999; 
+        overflow-y: auto;
+        border: none;
+        box-shadow: none;
+    }
+
+    .nav-container a {
+        display: block; 
+        width: 100%;
+        color: var(--accent-light);
+        text-align: left;
+        padding: 15px 10px;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+        background: none; 
+        border-radius: 0;
+    }
+    
+    .nav-container a:hover {
+        background-color: rgba(255, 255, 255, 0.1); 
+        transform: none; 
+    }
+
+    /* Muestra el menú cuando JS añade esta clase */
+    .nav-container.open {
+        display: flex; 
+    }
+    
+    .nav-right {
+        gap: 20px;
+    }
+
+    /* -- Grid de Productos (1 Columna) -- */
     .product-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
-    /* Quitar altura fija para permitir el flujo en una columna */
+
     .product-card {
-        height: auto; 
-        max-width: 500px; /* Limita el ancho en pantallas medianas si es necesario */
+        height: auto;
+        max-width: 450px; /* Limitar ancho en móvil */
         margin: 0 auto;
     }
-    
-    /* AJUSTES ADICIONALES PARA MÓVILES (máx. 800px) - Se mantienen los estilos de menú */
-    @media (max-width: 800px) {
-        /* Ajuste del Encabezado para separar logo y menú */
-        .site-header {
-            padding: 20px;
-            justify-content: space-between; 
-            gap: 0;
-        }
 
-        /* Mostrar el Botón Hamburguesa */
-        .hamburger-btn {
-            display: block; 
-        }
-
-        /* Estilos del Menú Móvil (nav-container) - EFECTO CRISTAL */
-        .nav-container {
-            display: none; 
-            position: fixed;
-            top: 0; 
-            right: 0;
-            width: 80%; 
-            min-height: 100vh;
-            background-color: rgba(0, 0, 0, 0.7); 
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px); 
-            flex-direction: column; 
-            align-items: flex-start;
-            padding-top: 80px; 
-            padding-left: 30px;
-            z-index: 999; 
-            overflow-y: auto;
-            border: none;
-            box-shadow: none;
-        }
-
-        /* Estilo para los Enlaces dentro del Menú Móvil */
-        .nav-container a {
-            display: block; 
-            width: 100%;
-            color: var(--accent-light);
-            text-align: left;
-            padding: 15px 10px;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-            background: none; 
-            border-radius: 0;
-        }
-        
-        .nav-container a:hover {
-            background-color: rgba(255, 255, 255, 0.1); 
-            transform: none; 
-        }
-
-        /* Clase para mostrar el menú (requiere JS) */
-        .nav-container.open {
-            display: flex; 
-        }
-        
-        /* Otros ajustes de diseño */
-        .nav-right {
-            gap: 20px;
-        }
+    /* -- Footer Responsive -- */
+    footer {
+        padding: 40px 20px;
+        text-align: center;
     }
-}
 
-/* ESTILOS BASE Y ANIMACIÓN DEL BOTÓN HAMBURGUESA */
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
 
-/* BOTÓN HAMBURGUESA */
-.hamburger-btn {
-    width: 30px;
-    height: 30px;
-    position: relative;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    z-index: 1001; 
-}
+    .footer-links-grid {
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .col-legal, .col-ayuda {
+        align-items: center;
+    }
 
-/* Las tres barras (líneas) */
-.hamburger-btn .bar {
-    display: block;
-    width: 100%;
-    height: 3px; 
-    background-color: var(--accent-light); 
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
-    margin: 5px 0; 
-}
+    .footer-right {
+        align-items: center;
+        width: 100%;
+        gap: 30px;
+    }
 
-/* ANIMACIÓN A 'X' cuando el botón tiene la clase 'open' */
-.hamburger-btn.open .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
+    .newsletter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .newsletter p {
+        width: 100%;
+        text-align: center;
+    }
 
-.hamburger-btn.open .bar:nth-child(2) {
-    opacity: 0; 
-}
+    .newsletter input {
+        width: 65%;
+        max-width: none;
+        margin-bottom: 0;
+        border-radius: 4px 0 0 4px;
+    }
 
-.hamburger-btn.open .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    .newsletter button {
+        width: 35%;
+        border-radius: 0 4px 4px 0;
+    }
+
+    .instagram {
+        align-self: center;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .discover {
+        font-size: 1.8rem;
+        letter-spacing: 0.5vw;
+        margin-top: 40px;
+        word-wrap: break-word;
+    }
+    
+    .cookie-consent-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+        gap: 10px;
+    }
 }
