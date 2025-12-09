@@ -1541,76 +1541,114 @@ footer{
 }
 /* ... (resto del CSS) ... */
 
+/* ======================================= */
 /* RESPONSIVE */
+/* ======================================= */
 @media(max-width: 800px){
-  header{ 
-    padding: 20px; 
-    justify-content: space-between;
-    gap: 0;
-  }
-  .logo-link img.logo{ height: 60px; } 
-  /* ... (otras reglas existentes) ... */
-  
-  .footer-container{ flex-direction: column; align-items: flex-start; }
-  .footer-links-grid{ 
-    flex-direction: column;
-    gap: 20px; 
-  }
-  .discover{
-    font-size: 1.8rem; 
-    letter-spacing: 5px; 
-    margin-top: 30px;
-    padding: 0 10px;
-  }
-  
-  /* --- RESPONSIVE PARA PÁGINAS LEGALES --- */
-  .legal-section {
-      /* Reducir el padding lateral de 40px a 20px */
-      padding: 80px 20px; 
-  }
+    /* HEADER & NAV CORRECCIÓN */
+    header{
+        padding: 20px;
+        justify-content: space-between; /* Arregla el centrado del header */
+        gap: 0; 
+    }
+    .logo-link img.logo { height: 60px; }
+    
+    /* MOSTRAR SOLO ENLACE DE PRODUCTOS */
+    .nav-container{ 
+        display: flex !important; /* FORZAR: Asegura que el contenedor de navegación sea visible */
+        padding: 8px 12px; 
+        gap: 0; 
+    }
 
-  .legal-title {
-      font-size: 1.8rem; /* Reducir tamaño del título principal */
-  }
+    /* 1. Ocultar todos los enlaces del menú por defecto */
+    .nav-container a {
+        display: none !important; /* FORZAR: Oculta todos los enlaces */
+    }
 
-  .website-domain {
-      font-size: 1rem; /* Reducir tamaño del dominio */
-      margin-bottom: 25px;
-  }
+    /* 2. Mostrar solo el enlace de PRODUCTOS */
+    .nav-container a[href*="productos.html"] { 
+        display: block !important; /* FORZAR: Muestra solo este enlace */
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        flex-shrink: 0;
+    }
+    
+    /* Ajustar la burbuja del carrito */
+    .cart-bubble{
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .cart-bubble img{ height: 22px; }
 
-  .legal-block h3 {
-      font-size: 1.4rem; /* Reducir tamaño de subtítulos */
-  }
-}
-/* RESPONSIVE GENERAL */
-@media(max-width: 800px){
-  header{ 
-    padding: 20px; 
-    /* Cambiado de justify-content: center (escritorio) a space-between (móvil) */
-    justify-content: space-between; 
-    gap: 0; /* Quitar el gap fijo de 180px */
-  }
-  .logo-link img.logo{ height: 60px; } 
-  
-  /* Ocultar el menú principal en móvil */
-  .nav-container{ 
-    display: none; 
-  }
-  
-  .nav-container a[href*="productos.html"] { 
-    display: block; 
-    /* Estilos para el enlace visible */
-    font-size: 0.9rem;
-    padding: 6px 10px;
-    flex-shrink: 0;
-  }
-  
-  /* Ajustar la burbuja del carrito */
-  .cart-bubble{
-    padding: 6px 10px;
-    font-size: 0.9rem;
-  }
-  .cart-bubble img{ height: 22px; }
-  
-  /* ... (resto de las reglas responsive) ... */
+    /* HERO SECTION */
+    .hero-section{
+        height: 80vh; 
+    }
+    .main-title{
+        font-size: 3rem;
+        letter-spacing: 0.4rem;
+    }
+    .main-subtitle{
+        font-size: 1.2rem;
+    }
+    
+    /* CARDS SECTION */
+    .cards-section{
+        padding: 40px 20px;
+    }
+    .cards-title{
+        font-size: 2rem;
+    }
+    .card-grid{
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        gap: 20px;
+    }
+    
+    /* FOOTER */
+    .footer-container{ flex-direction: column; align-items: flex-start; }
+    .footer-links-grid{ 
+        flex-direction: column;
+        gap: 20px; 
+        width: 100%;
+    }
+    .footer-right {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .newsletter {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .newsletter input {
+        width: 100%;
+        margin-right: 0;
+    }
+    .newsletter button {
+        width: 100%;
+    }
+    .instagram {
+        justify-content: flex-start;
+        margin-top: 15px;
+    }
+    .discover{
+        font-size: 1.8rem; 
+        letter-spacing: 5px; 
+        margin-top: 30px;
+        padding: 0 10px;
+    }
+
+    /* RESPONSIVE DE COOKIE BAR */
+    .cookie-consent-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 15px;
+    }
+    .cookie-consent-bar p {
+        font-size: 0.9rem;
+    }
+    .cookie-accept-btn {
+        width: 100%;
+        max-width: 300px;
+    }
 }
