@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Política de Devoluciones y Cambios - Thenullstore</title>
+    <link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<div id="particles-js"></div> 
+<header class="site-header">
+    <a href="index.html" class="logo-link">
+        <img src="Logo.svg" alt="Logo" class="logo">
+    </a>
+
+<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    
+    <div class="nav-right"> 
+        <nav class="nav-container" id="mobile-menu"> 
+            <a href="productos.html">Productos</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="preguntas-frecuentes.html">FAQ</a>
+        </nav>
+
+    <div class="cart-bubble">
+        <img src="Carrito.svg" alt="Carrito">
+        <span>Carrito</span>
+    </div>
+</header>
+
+<main>
+    <section class="legal-section">
+        <div class="legal-container">
+            <h1 class="legal-title">POLÍTICA DE DEVOLUCIONES Y CAMBIOS</h1>
+            <h2 class="website-domain">thenullstore.es</h2>
+
+            <div class="legal-block">
+                <h3>Derecho de Desistimiento (14 días)</h3>
+                <p>El cliente dispone de **14 días naturales** para ejercer el Derecho de Desistimiento, siempre y cuando el producto se devuelva en **perfectas condiciones**, sin signos de uso y con su etiqueta original puesta.</p>
+            </div>
+
+            <div class="legal-block">
+                <h3>Costes de Devolución y Cambio</h3>
+                <p>En caso de devolución o cambio de modelo o talla, el coste de **devolución y nuevo envío correrá a cargo del cliente**. Si el cambio se produce por un modelo de importe diferente, se gestionará la devolución o el abono de la diferencia según corresponda.</p>
+            </div>
+            
+            <div class="legal-block">
+                <h3>Productos Defectuosos o Errores de Envío</h3>
+                <p>Los productos defectuosos o errores de envío están cubiertos por la garantía legal, **asumiendo Nullstore la totalidad de los cargos derivados de la incidencia**.</p>
+            </div>
+
+            <div class="legal-block">
+                <p>Última actualización: Diciembre 2025.</p>
+            </div>
+            
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links-grid">
+            <div class="col-legal">
+                <a href="politica-privacidad.html">Política de privacidad</a>
+                <a href="politica-cookies.html">Política de cookies</a>
+                <a href="aviso-legal.html">Aviso legal</a>
+                <a href="devoluciones-reenvio.html">Devoluciones y reenvío</a>
+            </div>
+
+            <div class="col-ayuda">
+                <a href="contacto.html">Contacto</a>
+                <a href="quienes-somos.html">Quiénes somos</a>
+                <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+            </div>
+        </div>
+        
+        <div class="footer-right">
+            <div class="newsletter">
+                <p>Suscríbete a nuestra newsletter</p>
+                <input type="email" placeholder="Tu correo">
+                <button>Enviar</button>
+            </div>
+
+            <div class="instagram">
+                <img src="instagram.svg" alt="Instagram">
+                <a href="https://www.instagram.com/" target="_blank">Síguenos</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+<script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: "#6e2d81" },
+            shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 }
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 2, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "bubble" },
+                onclick: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    var count_particles, stats, update;
+    stats = new Stats();
+    stats.setMode(0);
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.left = "0px";
+    stats.domElement.style.top = "0px";
+    document.body.appendChild(stats.domElement);
+    count_particles = document.querySelector(".js-count-particles");
+    update = function () {
+        stats.begin();
+        stats.end();
+        if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS && window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+        } else {
+             count_particles.innerText = '--';
+        }
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
+<script>
+    // --- Variables Globales ---
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const SHIPPING_COST = 5.00; 
+    
+    // --- Funciones del Carrito ---
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        // Mostrar la cantidad de artículos en el carrito
+        cartBubbleSpan.textContent = `Carrito (${cart.length})`; 
+    }
+
+    // 1. Lógica de la Galería de Imágenes
+    function setupGallery() {
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const newSrc = thumbnail.dataset.image;
+                mainImage.src = newSrc;
+                
+                // Actualizar la clase 'active' para el estilo de miniatura seleccionada
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+        });
+    }
+
+    // 2. Lógica de Añadir al Carrito
+    function addToCartDetail() {
+        const name = document.getElementById('product-name').textContent;
+        const priceElement = document.querySelector('.product-price');
+        const price = parseFloat(priceElement.dataset.price); 
+        const successMessage = document.getElementById('added-message');
+
+        const item = {
+            name: name,
+            price: price,
+            units: 1 
+        };
+
+        cart.push(item);
+        saveCart();
+        updateCartCount();
+
+        // Mostrar notificación de éxito
+        successMessage.textContent = `✅ "${name}" añadido al carrito.`;
+        successMessage.style.display = 'block';
+        
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+        
+        const cartBubble = document.querySelector('.cart-bubble');
+        cartBubble.classList.add('flash-cart'); 
+        setTimeout(() => {
+            cartBubble.classList.remove('flash-cart');
+        }, 500);
+    }
+    
+    // 3. Lógica del Menú Móvil y Cookies (DOM Content Loaded)
+    document.addEventListener('DOMContentLoaded', () => {
+        setupGallery();
+        updateCartCount();
+
+        // Event listener para el botón "Añadir al Carrito"
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', addToCartDetail);
+        }
+
+        // Hacemos que la burbuja del carrito navegue a la página de checkout
+        document.querySelector('.cart-bubble').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        // --- INICIO LÓGICA DE MENÚ MÓVIL (CORREGIDA) ---
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu'); // Selector por ID
+        const body = document.body;
+
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open'); // Activa animación 'X'
+                mobileMenu.classList.toggle('open'); // Muestra/esconde el menú
+                body.classList.toggle('menu-active'); // Previene el scroll del fondo
+            });
+            // Cerrar menú al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+        // --- FIN LÓGICA DE MENÚ MÓVIL ---
+
+        // --- INICIO LÓGICA DE COOKIES (CONSOLIDADA) ---
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const consentGiven = localStorage.getItem('cookies_accepted');
+
+        if (!consentGiven && popup) { 
+            popup.style.display = 'flex'; 
+        }
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookies_accepted', 'true');
+                popup.style.display = 'none';
+            });
+        }
+        // --- FIN LÓGICA DE COOKIES ---
+    });
+</script>
+
+<script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: "#6e2d81" },
+            shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 }
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 2, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "bubble" },
+                onclick: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    var count_particles, stats, update;
+    stats = new Stats();
+    stats.setMode(0);
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.left = "0px";
+    stats.domElement.style.top = "0px";
+    // Nota: El script original del slider/rotating image se ha omitido ya que no existe un elemento <img> para él en esta página de detalle.
+</script>
+</body>
+</html>

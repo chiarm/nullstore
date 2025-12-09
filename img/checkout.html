@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nullstore - Finalizar Compra</title>
+	<link rel="icon" type="svg+xml" href="Logo.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="particles-js"></div>
+<header class="site-header">
+    <a href="index.html" class="logo-link">
+        <img src="Logo.svg" alt="Logo" class="logo">
+    </a>
+<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <nav class="nav-container" id="mobile-menu">
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+        <a href="preguntas-frecuentes.html">FAQ</a>
+    </nav>
+    <div class="cart-bubble">
+        <img src="Carrito.svg" alt="Carrito">
+        <span>Carrito</span>
+    </div>
+</header>
+
+<main>
+    <section class="checkout-section">
+        <h2>Finalizar Compra</h2>
+        <div class="checkout-container">
+            
+            <div class="checkout-form-block">
+                <h3>1. Información de Envío</h3>
+                <form id="shipping-form" class="shipping-form">
+                    <div class="input-group">
+                        <label for="full-name">Nombre Completo</label>
+                        <input type="text" id="full-name" name="full-name">
+                    </div>
+                    <div class="input-group">
+                        <label for="address">Dirección Completa</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                    <div class="input-group half-width">
+                        <label for="city">Ciudad</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="input-group half-width">
+                        <label for="zip">Código Postal</label>
+                        <input type="text" id="zip" name="zip" pattern="\d{5}" title="Cinco dígitos">
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout-summary-block">
+                <h3>Resumen del Pedido</h3>
+                <div class="product-list-summary" id="product-list-summary">
+                    <p class="empty-cart-message">Cargando...</p>
+                </div>
+
+                <div class="order-totals">
+                    <p>Subtotal: <span id="subtotal">0.00 €</span></p>
+                    <p class="shipping-cost">Envío: <span id="shipping">0.00 €</span></p>
+                    <hr>
+                    <h4>Total a Pagar: <span id="total-price">0.00 €</span></h4>
+                </div>
+
+                <button id="finish-purchase-btn" class="finish-purchase-btn" disabled>
+                    Finalizar Compra
+                </button>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links-grid">
+            <div class="col-legal">
+                <a href="politica-privacidad.html">Política de privacidad</a>
+                <a href="aviso-legal.html">Aviso legal</a>
+                <a href="devoluciones-reenvio.html">Devoluciones y reenvío</a>
+            </div>
+            <div class="col-ayuda">
+                <a href="contacto.html">Contacto</a>
+                <a href="quienes-somos.html">Quiénes somos</a>
+                <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="newsletter">
+                <p>¿Odias perderte cosas?</p>
+                <p>Novedades, secretos y descuentos. Cero <i>spam</i>, prometido.</p>
+                <input type="email" placeholder="Tu correo">
+                <button>Enviar</button>
+            </div>
+            <div class="instagram">
+                <img src="instagram.svg" alt="Instagram">
+                <a href="https://www.instagram.com/" target="_blank">Síguenos</a>
+            </div>
+        </div>
+    </div>
+    <div class="discover">DISCOVER THE VOID</div>
+</footer>
+<script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+<script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: "#6e2d81" },
+            shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 }
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 2, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "bubble" },
+                onclick: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    var count_particles, stats, update;
+    stats = new Stats();
+    stats.setMode(0);
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.left = "0px";
+    stats.domElement.style.top = "0px";
+    document.body.appendChild(stats.domElement);
+    count_particles = document.querySelector(".js-count-particles");
+    update = function () {
+        stats.begin();
+        stats.end();
+        if (window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS && window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+            count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+        } else {
+             count_particles.innerText = '--';
+        }
+        requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+</script>
+<div id="success-message" class="success-message" style="display: none;">
+    <p>✅ ¡Compra realizada con éxito! Redirigiendo...</p>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- 1. CARGA DE DATOS ---
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Referencias al DOM
+        const summaryElement = document.getElementById('product-list-summary');
+        const subtotalElement = document.getElementById('subtotal');
+        const shippingElement = document.getElementById('shipping');
+        const totalPriceElement = document.getElementById('total-price');
+        const finishBtn = document.getElementById('finish-purchase-btn');
+        const shippingForm = document.getElementById('shipping-form');
+        const successMessage = document.getElementById('success-message');
+        
+        // --- CONFIGURACIÓN DE ENVÍO ---
+        const FREE_SHIPPING_THRESHOLD = 30.00; 
+        const WEIGHT_PER_UNIT_KG = 0.5; 
+
+        // Actualizar contador en header
+        function updateCartCount() {
+            const cartBubbleSpan = document.querySelector('.cart-bubble span');
+            if(cartBubbleSpan) cartBubbleSpan.textContent = `Carrito (${cart.length})`;
+        }
+        
+        // Guardar y renderizar
+        function saveCartAndRender() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount(); 
+            renderCartSummary();
+        }
+
+        // --- CÁLCULO DE TOTALES ---
+        function calculateTotals() {
+            let subtotal = 0;
+            let totalUnits = cart.length; 
+            let totalWeight = totalUnits * WEIGHT_PER_UNIT_KG;
+            let shippingCost = 0;
+            let shippingMessage = '0.00 €';
+
+            // Sumar precios asegurando que sean números
+            cart.forEach(item => {
+                let price = parseFloat(item.price);
+                if (!isNaN(price)) {
+                    subtotal += price;
+                }
+            });
+            
+            // Lógica de Envío
+            if (subtotal > 0) {
+                if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+                    shippingCost = 0.00;
+                    shippingMessage = 'GRATUITO'; 
+                } else {
+                    // Tarifas por peso
+                    if (totalWeight <= 2) {
+                        shippingCost = 6.00; 
+                    } else if (totalWeight <= 5) {
+                        shippingCost = 10.00; 
+                    } else {
+                        shippingCost = 10.00; 
+                    }
+                    shippingMessage = shippingCost.toFixed(2) + ' €';
+                }
+            }
+
+            const total = subtotal + shippingCost;
+
+            // Actualizar HTML
+            subtotalElement.textContent = subtotal.toFixed(2) + ' €';
+            shippingElement.textContent = shippingMessage;
+            totalPriceElement.textContent = total.toFixed(2) + ' €';
+            
+            // Habilitar botón si hay subtotal
+            finishBtn.disabled = subtotal === 0;
+        }
+
+        // --- RENDERIZADO ---
+        function renderCartSummary() {
+            summaryElement.innerHTML = ''; 
+
+            if (cart.length === 0) {
+                summaryElement.innerHTML = '<p class="empty-cart-message">Tu carrito está vacío.</p>';
+                calculateTotals();
+                return;
+            }
+
+            // Agrupamos los productos para visualización (Cantidad x Producto)
+            const grouped = {};
+            
+            cart.forEach((item) => {
+                let safeName = item.name ? item.name.trim() : 'Producto';
+                let safePrice = parseFloat(item.price) || 0;
+                
+                // Clave compuesta única para agrupación
+                let key = safeName + "||" + safePrice;
+
+                if (!grouped[key]) {
+                    grouped[key] = {
+                        name: safeName,
+                        price: safePrice,
+                        units: 0,
+                        identifier: key 
+                    };
+                }
+                grouped[key].units += 1;
+            });
+
+            // Generar HTML a partir de los grupos
+            for (let key in grouped) {
+                const item = grouped[key];
+                const itemTotal = item.price * item.units;
+
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('summary-item');
+                
+                // --- CORRECCIÓN IMPORTANTE ---
+                // Reemplazamos las comillas dobles (") por su entidad HTML (&quot;) 
+                // para evitar que rompan el atributo data-identifier en el HTML.
+                const safeIdentifier = item.identifier.replace(/"/g, '&quot;');
+
+                // Usamos dataset para guardar la clave de identificación exacta
+                productDiv.innerHTML = `
+                    <p class="summary-name">${item.units} x ${item.name}</p>
+                    <div class="summary-info">
+                        <p class="summary-price">${itemTotal.toFixed(2)} €</p>
+                        <button class="remove-item-btn" data-identifier="${safeIdentifier}">Eliminar</button>
+                    </div>
+                `;
+                summaryElement.appendChild(productDiv);
+            }
+
+            calculateTotals();
+        }
+
+        // --- LÓGICA DE ELIMINACIÓN (Robusta) ---
+        summaryElement.addEventListener('click', (e) => {
+            // Verificamos si clicó en el botón
+            if (e.target.classList.contains('remove-item-btn')) {
+                const identifierToDelete = e.target.getAttribute('data-identifier');
+                
+                if (!identifierToDelete) return;
+
+                // Desglosamos el identificador para saber qué borrar
+                // El formato es "Nombre||Precio"
+                const separatorIndex = identifierToDelete.indexOf("||");
+                const targetName = identifierToDelete.substring(0, separatorIndex);
+                // Convertimos el precio recuperado a número para comparar
+                const targetPrice = parseFloat(identifierToDelete.substring(separatorIndex + 2));
+
+                // Filtramos el carrito original
+                cart = cart.filter(item => {
+                    let itemName = item.name ? item.name.trim() : 'Producto';
+                    let itemPrice = parseFloat(item.price) || 0;
+                    
+                    // Comprobación de coincidencia. Usamos una pequeña tolerancia para flotantes
+                    const isSameName = itemName === targetName;
+                    const isSamePrice = Math.abs(itemPrice - targetPrice) < 0.01;
+
+                    // Si es el mismo producto (nombre y precio), devolvemos false para eliminarlo.
+                    // Si no es el mismo, devolvemos true para conservarlo.
+                    return !(isSameName && isSamePrice);
+                });
+
+                saveCartAndRender();
+            }
+        });
+
+        // --- FINALIZAR COMPRA ---
+        finishBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (cart.length === 0) return;
+
+            successMessage.style.display = 'block';
+            
+            // Vaciar carrito y redirigir
+            localStorage.removeItem('cart');
+            cart = [];
+            updateCartCount();
+            renderCartSummary();
+
+            setTimeout(() => {
+                window.location.href = 'index.html'; 
+            }, 3000); 
+        });
+
+        // Detectar cambios en formulario (opcional)
+        shippingForm.addEventListener('input', calculateTotals);
+
+        // Inicializar
+        updateCartCount();
+        renderCartSummary();
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+
+        // 1. Verificar si el usuario ya aceptó las cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+
+        if (!consentGiven) {
+            // 2. Si NO ha aceptado, mostramos el popup
+            popup.style.display = 'flex';
+        }
+
+        // 3. Agregar el listener al botón para aceptar
+        acceptBtn.addEventListener('click', () => {
+            // Guardar la preferencia en el navegador
+            localStorage.setItem('cookies_accepted', 'true');
+            // Ocultar el popup
+            popup.style.display = 'none';
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.querySelector('.nav-container');
+        const body = document.body;
+
+        // Lógica de Cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+        if (!consentGiven) { popup.style.display = 'flex'; }
+
+        acceptBtn.addEventListener('click', () => {
+            localStorage.setItem('cookies_accepted', 'true');
+            popup.style.display = 'none';
+        });
+
+        // Lógica del Menú Móvil
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+                body.classList.toggle('menu-active');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
+<div id="cookie-popup" class="cookie-consent-bar">
+    <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
+    <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
+</div>
+</body>
+</html>

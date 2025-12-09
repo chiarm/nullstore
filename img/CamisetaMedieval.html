@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nullstore- Camiseta Medieval</title>
+	<link rel="icon" type="svg+xml" href="Logo.svg">
+    <link rel="stylesheet" href="detallesproductos.css">
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="logo-link">
+        <img src="Logo.svg" alt="Logo" class="logo">
+    </a>
+
+<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    
+        <nav class="nav-container" id="mobile-menu"> 
+            <a href="productos.html">Productos</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="preguntas-frecuentes.html">FAQ</a>
+        </nav>
+
+    <div class="cart-bubble">
+        <img src="Carrito.svg" alt="Carrito">
+        <span>Carrito</span>
+    </div>
+</header>
+
+<main>
+    <section class="product-detail-section">
+        <div class="detail-container">
+            
+            <div class="gallery-block">
+                <div class="main-image-container">
+                    <img src="img/Medieval_duo.jpg" alt="Camiseta Astro principal" id="main-product-image">
+                </div>
+                <div class="thumbnail-gallery">
+                    <img src="img/Medieval_duo.jpg" alt="Miniatura 1" class="thumbnail active" data-image="img/Medieval_duo.jpg">
+                    <img src="img/medieval_front.jpg" alt="Miniatura 2" class="thumbnail" data-image="img/medieval_front.jpg">
+                    <img src="img/medieval_back.jpg" alt="Miniatura 3" class="thumbnail" data-image="img/medieval_back.jpg">
+                </div>
+            </div>
+
+            <div class="info-block">
+                <h1 id="product-name">Camiseta Medieval</h1>
+                <p class="product-sku">Ref: Medieval</p>
+                <p class="product-weight">Peso (Estimado): <span id="product-weight-value">0.2 kg</span></p>
+                
+                <h2 class="product-price" data-price="25.95">25,95 €</h2>
+
+                <div class="controls-container">
+                    
+                    <div class="size-selector-group">
+                        <label for="size-selector">Selecciona la Talla:</label>
+                        <select id="size-selector">
+                            <option value="S">S</option>
+                            <option value="M" selected>M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <button id="add-to-cart-btn" class="add-to-cart-detail-btn">
+                        Añadir al Carrito
+                    </button>
+                    <div id="added-message" class="added-success-message" style="display:none;"></div>
+                </div>
+
+                <div class="detail-description">
+                    <h3>Descripción del Producto</h3>
+                    <p>El diseño está conceptualmente inspirado en la tensión entre el amor y la traición, una dicotomía emocional que, aunque compleja, moldea nuestra experiencia. CKidd plasma la idea de que los lazos más fuertes son, irónicamente, los que nos dejan más expuestos.<br>100% Algodón pesado de 180g/m².<br>Estampación DTF.<br>Sin costuras laterales, ofreciendo un ajuste excepcionalmente cómodo.</p>
+                    <h3>Guía de Tallas</h3>
+                    <p>Si dudas entre dos tallas, te recomendamos elegir la superior para un ajuste más holgado.</p>
+					<img src="img/guia_tallas_gildan.svg" alt="Guía de tallas: diagrama de camiseta con medidas de ancho, largo y manga." class="size-guide-img"/>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links-grid">
+            <div class="col-legal">
+                <a href="politica-privacidad.html">Política de privacidad</a>
+                <a href="aviso-legal.html">Aviso legal</a>
+                <a href="devoluciones-reenvio.html">Devoluciones y reenvío</a>
+            </div>
+            <div class="col-ayuda">
+                <a href="contacto.html">Contacto</a>
+                <a href="quienes-somos.html">Quiénes somos</a>
+                <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="newsletter">
+                <p>¿Odias perderte cosas?</p>
+                <p>Novedades, secretos y descuentos. Cero <i>spam</i>, prometido.</p>
+                <input type="email" placeholder="Tu correo">
+                <button>Enviar</button>
+            </div>
+            <div class="instagram">
+                <img src="instagram.svg" alt="Instagram">
+                <a href="https://www.instagram.com/thenullstore/" target="_blank">Síguenos</a>
+            </div>
+        </div>
+    </div>
+    <div class="discover">DISCOVER THE VOID</div>
+</footer>
+
+<script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+<script>
+    // --- Variables Globales ---
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const SHIPPING_COST = 5.00; 
+    
+    // --- Funciones del Carrito ---
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        // Mostrar la cantidad de artículos en el carrito
+        cartBubbleSpan.textContent = `Carrito (${cart.length})`; 
+    }
+
+    // 1. Lógica de la Galería de Imágenes
+    function setupGallery() {
+        const mainImage = document.getElementById('main-product-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const newSrc = thumbnail.dataset.image;
+                mainImage.src = newSrc;
+                
+                // Actualizar la clase 'active' para el estilo de miniatura seleccionada
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+            });
+        });
+    }
+
+    // 2. Lógica de Añadir al Carrito
+    function addToCartDetail() {
+        const name = document.getElementById('product-name').textContent;
+        const priceElement = document.querySelector('.product-price');
+        const price = parseFloat(priceElement.dataset.price); 
+        const successMessage = document.getElementById('added-message');
+
+        const item = {
+            name: name,
+            price: price,
+            units: 1 
+        };
+
+        cart.push(item);
+        saveCart();
+        updateCartCount();
+
+        // Mostrar notificación de éxito
+        successMessage.textContent = `✅ "${name}" añadido al carrito.`;
+        successMessage.style.display = 'block';
+        
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+        
+        const cartBubble = document.querySelector('.cart-bubble');
+        cartBubble.classList.add('flash-cart'); 
+        setTimeout(() => {
+            cartBubble.classList.remove('flash-cart');
+        }, 500);
+    }
+    
+    // 3. Lógica del Menú Móvil y Cookies (DOM Content Loaded)
+    document.addEventListener('DOMContentLoaded', () => {
+        setupGallery();
+        updateCartCount();
+
+        // Event listener para el botón "Añadir al Carrito"
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', addToCartDetail);
+        }
+
+        // Hacemos que la burbuja del carrito navegue a la página de checkout
+        document.querySelector('.cart-bubble').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        // --- INICIO LÓGICA DE MENÚ MÓVIL (CORREGIDA) ---
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu'); // Selector por ID
+        const body = document.body;
+
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                toggleBtn.classList.toggle('open'); // Activa animación 'X'
+                mobileMenu.classList.toggle('open'); // Muestra/esconde el menú
+                body.classList.toggle('menu-active'); // Previene el scroll del fondo
+            });
+            // Cerrar menú al hacer clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+        // --- FIN LÓGICA DE MENÚ MÓVIL ---
+
+        // --- INICIO LÓGICA DE COOKIES (CONSOLIDADA) ---
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+        const consentGiven = localStorage.getItem('cookies_accepted');
+
+        if (!consentGiven && popup) { 
+            popup.style.display = 'flex'; 
+        }
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookies_accepted', 'true');
+                popup.style.display = 'none';
+            });
+        }
+        // --- FIN LÓGICA DE COOKIES ---
+    });
+</script>
+
+<script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 160, density: { enable: true, value_area: 800 } },
+            color: { value: "#6e2d81" },
+            shape: {
+                type: "circle",
+                stroke: { width: 0, color: "#000000" },
+                polygon: { nb_sides: 5 },
+                image: { src: "img/github.svg", width: 100, height: 100 }
+            },
+            opacity: {
+                value: 1,
+                random: true,
+                anim: { enable: true, speed: 2, opacity_min: 0, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 4, size_min: 0.3, sync: false }
+            },
+            line_linked: {
+                enable: false,
+                distance: 150,
+                color: "#ffffff",
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 600 }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "bubble" },
+                onclick: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+                repulse: { distance: 400, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+    
+    var count_particles, stats, update;
+    stats = new Stats();
+    stats.setMode(0);
+    stats.domElement.style.position = "absolute";
+    stats.domElement.style.left = "0px";
+    stats.domElement.style.top = "0px";
+    // Nota: El script original del slider/rotating image se ha omitido ya que no existe un elemento <img> para él en esta página de detalle.
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nullstore - Inicio</title>
+    <link rel="icon" type="image/svg+xml" href="Logo.svg"> 
+    <link rel="stylesheet" href="Inicio.css">
+</head>
+<body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Recuperar carrito del almacenamiento local para mostrar el número
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        const cartBubbleSpan = document.querySelector('.cart-bubble span');
+        if(cartBubbleSpan) {
+            // Inicializar el contador con la cantidad de items en el carrito
+            cartBubbleSpan.textContent = `Carrito (${cart.length})`;
+        }
+
+        // Event listener para que la burbuja del carrito navegue al checkout
+        const cartBubble = document.querySelector('.cart-bubble');
+        if(cartBubble) {
+            cartBubble.addEventListener('click', () => {
+                window.location.href = 'checkout.html';
+            });
+        }
+    });
+</script>
+
+<header class="site-header">
+    <a href="index.html" class="logo-link">
+        <img src="Logo.svg" alt="Logo" class="logo">
+    </a>
+	<button class="hamburger-btn" id="menu-toggle-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <nav class="nav-container" id="mobile-menu">
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+        <a href="preguntas-frecuentes.html">FAQ</a>
+    </nav>
+
+    <div class="cart-bubble">
+        <img src="Carrito.svg" alt="Carrito">
+        <span>Carrito</span>
+    </div>
+</header>
+
+<main>
+    <section class="hero-section">
+        
+        <video autoplay muted loop playsinline id="hero-video" class="hero-video">
+            <source src="img/Inicio.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hero-overlay"></div> 
+        <div class="hero-content"> 
+            <h1 class="hero-main-title">DISCOVER THE VOID</h1>
+            <h2 class="hero-subtitle">Nuevas camisetas</h2>
+            <p class="hero-desc">Descubre las nuevas incorporaciones de la temporada otoño '25</p>
+            
+            <div class="hero-buttons">
+                <a href="CamisetaMedieval.html" class="hero-btn btn-ckidd">Medieval by Ckidd</a>
+                <a href="CamisetaUpdate.html" class="hero-btn btn-update">Update</a>
+            </div>
+        </div>
+    </section>
+    
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links-grid">
+            <div class="col-legal">
+                <a href="politica-privacidad.html">Política de privacidad</a>
+                <a href="aviso-legal.html">Aviso legal</a>
+                <a href="devoluciones-reenvio.html">Devoluciones y reenvío</a>
+            </div>
+            <div class="col-ayuda">
+                <a href="contacto.html">Contacto</a>
+                <a href="quienes-somos.html">Quiénes somos</a>
+                <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+            </div>
+        </div>
+        <div class="footer-right">
+            <div class="newsletter">
+                <p>¿Odias perderte cosas?</p>
+                <p>Novedades, secretos y descuentos. Cero <i>spam</i>, prometido.</p>
+                <input type="email" placeholder="Tu correo">
+                <button>Enviar</button>
+            </div>
+            <div class="instagram">
+                <img src="instagram.svg" alt="Instagram">
+                <a href="https://www.instagram.com/thenullstore/" target="_blank">Síguenos</a>
+            </div>
+        </div>
+    </div>
+    <div class="discover">DISCOVER THE VOID</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popup = document.getElementById('cookie-popup');
+        const acceptBtn = document.getElementById('accept-cookies-btn');
+
+        // 1. Verificar si el usuario ya aceptó las cookies
+        const consentGiven = localStorage.getItem('cookies_accepted');
+
+        if (!consentGiven) {
+            // 2. Si NO ha aceptado, mostramos el popup
+            popup.style.display = 'flex';
+        }
+
+        // 3. Agregar el listener al botón para aceptar
+        acceptBtn.addEventListener('click', () => {
+            // Guardar la preferencia en el navegador
+            localStorage.setItem('cookies_accepted', 'true');
+            // Ocultar el popup
+            popup.style.display = 'none';
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Obtenemos el botón y el menú por sus IDs
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const body = document.body;
+
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                // 1. Alterna la clase 'open' en el botón para la animación a 'X'
+                toggleBtn.classList.toggle('open');
+                
+                // 2. Alterna la clase 'open' en el menú para mostrarlo/ocultarlo
+                mobileMenu.classList.toggle('open');
+                
+                // 3. Opcional: Alterna una clase en el body para prevenir el scroll de fondo
+                body.classList.toggle('menu-active');
+            });
+            
+            // Opcional: Cerrar el menú si el usuario hace clic en un enlace
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                    body.classList.remove('menu-active');
+                });
+            });
+        }
+    });
+</script>
+<style>
+    /* Bloquea el scroll de la página cuando el menú está abierto */
+    body.menu-active {
+        overflow: hidden; 
+    }
+</style>
+<div id="cookie-popup" class="cookie-consent-bar">
+    <p>Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación. Al continuar, aceptas el uso de <a href="politica-cookies.html" target="_blank" class="cookie-link">cookies</a>.</p>
+    <button id="accept-cookies-btn" class="cookie-accept-btn">Aceptar y Continuar</button>
+</div>
+</body>
+</html>

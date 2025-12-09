@@ -1,0 +1,1756 @@
+/* CSS general para todas las páginas */
+:root{
+  --accent-dark: #6e2d81;
+  --bg-primary: #d2c0da;
+  --bg-secondary: #c1a9cb;
+  --accent-light: #faf9f5;
+  --brand-dark: #2a2927;
+  --text: #111;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+/* ==================================== */
+/* === PARTICLES.JS CUSTOM STYLES === */
+/* ==================================== */
+
+/* ---- reset ---- (Añadido/Modificado) */
+body {
+  /* Asegura que body no tenga un background-color sólido que tape las partículas */
+  /* background-color: transparent; (Mantenemos la regla de tu CSS original) */
+  font-family: Montserrat, system-ui, Montserrat; /* Nuevo: Fuente y tamaño base */
+}
+canvas {
+  display: block;
+  vertical-align: bottom;
+} 
+
+/* Contenedor de partículas: Fija la posición y establece el fondo */
+#particles-js{ 
+    /* CLAVE: Cambiar a 'fixed' para que cubra todo el viewport y no solo el documento */
+    position: fixed; /* Mantenemos fixed de tu CSS original */
+    
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    
+    /* El color de fondo y z-index se mantienen */
+    background-color: #c1a9cb; /* Fondo de la partícula */
+    background-position: 50% 50%; 
+    z-index: -1; /* CLAVE: Mantenerlo detrás de todo */
+}
+
+/* Estilos para el contador de partículas (MODIFICADO para coincidir con tu request) */
+.count-particles {
+    background: #6e2d81; /* Morado del acento */
+    position: absolute; 
+    top: 48px; 
+    left: 0; 
+    width: 80px; 
+    color: #13E8E9; /* Color de texto del contador */
+    font-size: .8em; 
+    text-align: left; 
+    text-indent: 4px; 
+    line-height: 14px; 
+    padding-bottom: 2px; 
+    font-family: Montserrat, system-ui, Montserrat; 
+    font-weight: bold; 
+    z-index: 9999; /* Alto para que sea visible */
+} 
+.js-count-particles{ 
+    font-size: 1.1em; 
+} 
+#stats, .count-particles{ 
+    -webkit-user-select: none; 
+    margin-top: 5px; 
+    margin-left: 5px; 
+} 
+#stats{ 
+    border-radius: 3px 3px 0 0; 
+    overflow: hidden; 
+} 
+.count-particles{ 
+    border-radius: 0 0 3px 3px; 
+}
+
+/* También, verifica que el cuerpo (body) de tu CSS no tenga un fondo sólido que tape las partículas */
+body {
+    /* Asegura que body no tenga un background-color blanco o sólido */
+    /* background-color: transparent; */ 
+    /* ... otros estilos de body ... */
+}
+/* HEADER */
+header{
+  width: 100%;
+  padding: 20px 40px; 
+  display: flex;
+  align-items: center;
+  /* Centramos los elementos */
+  justify-content: center; 
+  /* Espaciado amplio y optimizado entre Logo y Menú/Carrito */
+  gap: 180px; 
+  background: #111;
+  color: #fff;
+}
+.logo-link img.logo { height: 80px; } 
+
+/* Contenedor para el Menú y el Carrito */
+.nav-right {
+    display: flex;
+    align-items: center;
+    /* Separación adecuada entre Menú y Carrito */
+    gap: 40px; 
+}
+
+.nav-container{
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 26px;
+  border-radius: 14px;
+  display: flex;
+  gap: 18px;
+  backdrop-filter: blur(4px);
+}
+.nav-container a{
+  color: var(--accent-light);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: all .18s ease;
+}
+.nav-container a:hover{
+  background: var(--accent-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.cart-bubble{
+  background: var(--accent-dark);
+  padding: 8px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(110,45,129,0.12);
+  cursor: pointer;
+}
+.cart-bubble img{ height: 28px; filter: brightness(0) invert(1); }
+
+/* FOOTER */
+footer{
+  padding: 40px 20px; 
+  background: #111;
+  color: #fff;
+  
+}
+.footer-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px; 
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.footer-links-grid{
+  display: flex;
+  gap: 30px; 
+}
+.col-legal, .col-ayuda{
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+.col-legal a, .col-ayuda a{
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.instagram{ 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+/* ⬅️ MODIFICACIÓN CLAVE: CAMBIA EL COLOR DEL SVG A BLANCO */
+.instagram img{ 
+    height: 28px; 
+    /* Esta línea convierte el icono (asumiendo que es negro o de un color oscuro) a blanco */
+    filter: brightness(0) invert(1); 
+}
+
+/* REGLA DEL ENLACE (Ya estaba en blanco) */
+.instagram a {
+    color: #fff; /* Asegura el color blanco para el texto "Síguenos" */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.newsletter input{
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: #fff;
+  width: 220px;
+  margin-right: 8px;
+}
+.newsletter button{
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--accent-dark);
+  color: var(--accent-light);
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.instagram{ display: flex; align-items: center; gap: 8px; }
+.instagram img{ height: 28px; }
+
+/* REGLA AÑADIDA/MODIFICADA: Aseguramos el color blanco para el texto del enlace de Instagram */
+.instagram a {
+    color: #fff; /* Implementación del color blanco */
+    text-decoration: none;
+    font-weight: 500;
+    /* Opcional: añade transición para el hover si lo tienes definido en otro lugar */
+    /* transition: color 0.2s; */
+}
+/* Opcional: Define aquí el estilo hover si es necesario */
+/* .instagram a:hover {
+    color: var(--accent-dark);
+} */
+
+/* ESTILOS DEL DISCOVER */
+.discover{
+  margin-top: 60px; 
+  text-align: center;
+  font-weight: 900; 
+  letter-spacing: 1.5vw; 
+  color: var(--accent-light);
+  font-size: 3.5rem; 
+  line-height: 1; 
+  text-transform: uppercase; 
+  padding: 0 5px; 
+}
+
+/* RESPONSIVE */
+@media(max-width: 800px){
+  header{ 
+    padding: 20px; 
+    justify-content: space-between; /* Volvemos a separación para móvil */
+    gap: 0;
+  }
+  .logo-link img.logo{ height: 60px; } 
+  .nav-right {
+    gap: 15px; 
+  }
+  .nav-container{ padding: 8px 12px; gap: 10px; }
+  .footer-container{ flex-direction: column; align-items: flex-start; }
+  .footer-links-grid{ 
+    flex-direction: column;
+    gap: 20px; 
+  }
+  .discover{
+    font-size: 1.8rem; 
+    letter-spacing: 5px; 
+    margin-top: 30px;
+    padding: 0 10px;
+  }
+}
+/* --- ESTILOS DE LA PÁGINA DE PRODUCTOS (MEJORADO) --- */
+
+/* Contenedor principal de la sección de productos */
+.products-section {
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.products-section h2 {
+    font-size: 2.5rem;
+    color: var(--brand-dark);
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+/* La cuadrícula de productos: 4 columnas en escritorio */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px;
+}
+
+/* Estilo de la tarjeta de producto */
+.product-card {
+    background-color: var(--accent-light);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    
+    /* MODIFICACIÓN: Sombra base más pronunciada */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); 
+    
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    /* MEJORA: Flexbox para asegurar que el botón esté siempre abajo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* MODIFICACIÓN: Efecto de elevación mucho más notorio al hacer hover */
+.product-card:hover {
+    transform: translateY(-5px);
+    /* Sombra más grande y oscura para el efecto "flotante" */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); 
+}
+
+/* Estilo para el enlace que envuelve la información */
+.product-card .product-link {
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+    flex-grow: 1; /* Permite que el contenido crezca y empuje el botón hacia abajo */
+}
+
+.product-image-container {
+    height: 250px; 
+    overflow: hidden;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; /* Transición para el efecto de zoom */
+}
+
+/* MEJORA: Zoom sutil en la imagen al hacer hover en la tarjeta */
+.product-card:hover .product-image-container img {
+    transform: scale(1.05); 
+}
+
+.product-info {
+    padding: 15px;
+    text-align: left;
+}
+
+.product-name {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+    color: var(--brand-dark);
+    font-weight: 600; /* Destaca un poco más el nombre */
+}
+
+.product-description {
+    color: var(--text);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--accent-dark); 
+    margin-bottom: 15px;
+}
+
+/* Estilos del botón Añadir al Carrito */
+.add-to-cart {
+    width: 100%;
+    padding: 12px; /* Ligeramente más padding para mejor clic */
+    border: none;
+    /* MEJORA: Radio consistente con la tarjeta */
+    border-radius: 0 0 12px 12px; 
+    background-color: var(--accent-dark);
+    color: var(--accent-light);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    text-transform: uppercase; /* Consistencia con otros botones */
+    font-size: 1rem;
+}
+
+.add-to-cart:hover {
+    /* Usamos el color previamente definido para el hover */
+    background-color: #552565; 
+    transform: translateY(-1px); /* Efecto sutil al presionar */
+}
+
+/* RESPONSIVE para la cuadrícula */
+@media(max-width: 1200px) {
+    /* 3 columnas para tabletas grandes */
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px; 
+    }
+}
+
+@media(max-width: 800px) {
+    /* 2 columnas para móvil/tableta pequeña */
+    .products-section {
+        padding: 40px 20px;
+    }
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media(max-width: 500px) {
+    /* 1 columna para móviles muy pequeños */
+    .products-section {
+        padding: 30px 15px;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .product-card {
+        max-width: 350px; /* Centra la tarjeta en la columna única */
+        margin: 0 auto;
+    }
+    .product-image-container {
+        height: 300px; /* Damos más altura ya que el ancho es mayor */
+    }
+}
+/* --- ESTILOS DE LA PÁGINA DE CONTACTO --- */
+
+.contact-section {
+    padding: 80px 40px; 
+}
+
+/* Contenedor principal para centrar y aplicar Flexbox */
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px; /* Espacio entre los dos bloques */
+    align-items: flex-start; /* Alinea los bloques arriba */
+}
+
+/* Bloque Izquierdo: Texto Informativo */
+.contact-text-block {
+    flex: 1; /* Ocupa la mitad del espacio */
+    padding: 20px 0;
+}
+
+.contact-text-block h2 {
+    font-size: 2.2rem;
+    color: var(--accent-dark);
+    margin-bottom: 20px;
+}
+
+.contact-text-block p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: var(--brand-dark);
+}
+
+.contact-details {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.contact-details p {
+    margin-bottom: 5px;
+}
+
+/* Bloque Derecho: Formulario */
+.contact-form-block {
+    flex: 1; /* Ocupa la otra mitad del espacio */
+    background-color: var(--accent-light);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-block h3 {
+    font-size: 1.8rem;
+    color: var(--brand-dark);
+    margin-bottom: 25px;
+}
+
+.contact-form {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los inputs se envuelvan */
+    gap: 15px; /* Espacio entre los campos */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    /* Divide el espacio entre Nombre y Apellidos (50% - gap) */
+    flex: 1 1 calc(50% - 7.5px); 
+}
+
+.input-group.full-width {
+    flex: 1 1 100%; /* Ocupa todo el ancho (Email y Mensaje) */
+}
+
+.input-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--brand-dark);
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #fff;
+    resize: vertical; /* Solo permite redimensionar verticalmente el textarea */
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: var(--accent-dark);
+    outline: none;
+}
+
+/* Contenedor del Botón (para alinearlo a la derecha) */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Alinea el botón a la derecha */
+    margin-top: 10px;
+}
+
+.send-button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-dark);
+    color: var(--accent-light);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.send-button:hover {
+    background-color: #552565;
+    transform: translateY(-2px);
+}
+
+/* --- ESTILOS DE LA PÁGINA DE PREGUNTAS FRECUENTES (FAQ) --- */
+
+.faq-section {
+    padding: 80px 40px;
+    max-width: 900px; /* Ancho cómodo para el contenido central */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-section h2 {
+    font-size: 2.5rem;
+    color: var(--brand-dark);
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Separación entre los desplegables */
+}
+
+/* El elemento <details> como tarjeta de acordeón visual */
+.faq-item {
+    background-color: var(--accent-light); /* Fondo claro para contraste */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: left;
+    
+    /* Indicador visual fuerte: barra lateral */
+    border-left: 8px solid var(--bg-secondary);
+}
+
+.faq-item[open] {
+    border-left: 8px solid var(--accent-dark); /* Color de marca cuando está abierto */
+    box-shadow: 0 6px 15px rgba(110, 45, 129, 0.15); /* Sombra más fuerte */
+}
+
+
+/* La pregunta: <summary> */
+.faq-question {
+    display: block; 
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--brand-dark);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+    user-select: none; 
+}
+
+/* Hover effect */
+.faq-item:hover .faq-question {
+    background-color: rgba(0, 0, 0, 0.03); 
+}
+
+/* Ocultamos el marcador nativo del details */
+.faq-question::marker,
+.faq-question::-webkit-details-marker {
+    display: none; 
+}
+
+/* Icono de + / - personalizado */
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--accent-dark);
+    font-weight: 300;
+    transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-question::after {
+    content: '-';
+}
+
+
+/* La respuesta: <div> */
+.faq-answer {
+    padding: 0 25px 25px;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Fondo blanco puro para la respuesta */
+}
+
+.faq-answer p {
+    line-height: 1.6;
+    margin-top: 20px;
+    color: var(--text);
+}
+
+
+/* RESPONSIVE */
+@media(max-width: 600px) {
+    .faq-section {
+        padding: 40px 20px;
+    }
+    .faq-item {
+        border-left: 5px solid var(--bg-secondary); /* Barra más delgada en móvil */
+    }
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+    .faq-question::after {
+        right: 20px;
+        font-size: 1.2rem;
+    }
+    .faq-answer {
+        padding: 0 20px 20px;
+    }
+}
+/* --- ESTILOS DE LA PÁGINA QUIÉNES SOMOS --- */
+
+.about-section {
+    padding: 80px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilos de Bloque Centrado (Inicial y Final) */
+.text-centered {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+}
+
+.about-intro h2 {
+    font-size: 2.8rem;
+    color: var(--accent-dark);
+    margin-bottom: 20px;
+}
+
+.about-intro p, .about-final p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.about-final {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.about-final h3 {
+    font-size: 2rem;
+    color: var(--brand-dark);
+    margin-bottom: 15px;
+}
+
+.signature {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent-dark);
+}
+
+/* Estilos de Bloques Alternados (Imagen/Texto) */
+.about-block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 100px; 
+    gap: 50px;
+}
+
+.about-image-container {
+    flex: 1; 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.about-image-container:hover .about-image {
+    transform: scale(1.03); 
+}
+
+.about-text-content {
+    flex: 1; 
+    padding: 20px 0;
+}
+
+.about-text-content h3 {
+    font-size: 2rem;
+    color: var(--brand-dark);
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--accent-dark); 
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.about-text-content p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: var(--text);
+}
+
+
+/* Bloque 2: Texto Izquierda / Imagen Derecha (No se necesita row-reverse) */
+.right-image-block {
+    flex-direction: row; /* Asegura que Texto (1º en HTML) va a la izquierda, Imagen (2º) a la derecha */
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .about-section {
+        padding: 50px 20px;
+    }
+    
+    .about-block {
+        /* Apilar en móvil */
+        flex-direction: column; 
+        margin-bottom: 60px;
+        gap: 30px;
+        text-align: center; 
+    }
+
+    .about-text-content h3 {
+        margin-top: 10px;
+        margin-bottom: 15px;
+        display: block; 
+        text-align: center; 
+    }
+    
+    /* Bloque 1 (left-image-block): Imagen, Texto. Usamos column-reverse para obtener Texto (arriba) | Imagen (abajo) */
+    .left-image-block {
+        flex-direction: column-reverse; 
+    }
+
+    /* Bloque 2 (right-image-block): Texto, Imagen. Usamos column para obtener Texto (arriba) | Imagen (abajo) */
+    .right-image-block {
+        flex-direction: column; 
+    }
+}
+/* --- ESTILOS DE LA PÁGINA DE CHECKOUT (REVISADO) --- */
+
+.checkout-section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.checkout-section h2 {
+    font-size: 2.5rem;
+    color: var(--accent-dark);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.checkout-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.checkout-form-block, .checkout-summary-block {
+    flex: 1;
+    padding: 25px;
+    border-radius: 12px;
+    background-color: var(--accent-light);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.checkout-form-block h3, .checkout-summary-block h3 {
+    font-size: 1.5rem;
+    color: var(--brand-dark);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--bg-secondary);
+    padding-bottom: 10px;
+}
+
+/* Estilos del Formulario */
+.shipping-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%; 
+}
+.input-group.half-width {
+    flex: 1 1 calc(50% - 7.5px); 
+}
+.input-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.input-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+
+/* Estilos del Resumen INTERACTIVO */
+.product-list-summary {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de un solo ítem interactivo */
+.summary-item-interactive {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.summary-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Controles (Cantidad, Precio y Eliminar) */
+.summary-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Controles de Cantidad (+ / input / -) */
+.quantity-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.quantity-input button {
+    background: var(--bg-primary);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--brand-dark);
+}
+
+.quantity-input button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.quantity-input input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    padding: 5px 0;
+    font-size: 1rem;
+    height: 30px;
+    -moz-appearance: textfield; 
+}
+
+.quantity-input input::-webkit-outer-spin-button,
+.quantity-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none; 
+    margin: 0;
+}
+
+/* Precio Total del Ítem */
+.summary-price {
+    font-weight: 700;
+    width: 80px;
+    text-align: right;
+}
+
+/* Botón de eliminación (X) */
+.remove-item-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    padding: 5px;
+    transition: opacity 0.2s;
+}
+.remove-item-btn:hover {
+    opacity: 1;
+}
+
+/* Totales */
+.order-totals {
+    margin-top: 15px;
+}
+.order-totals p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.order-totals hr {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid var(--brand-dark);
+}
+.order-totals h4 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    color: var(--accent-dark);
+}
+
+.finish-purchase-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-dark);
+    color: var(--accent-light);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.finish-purchase-btn:hover:not([disabled]) {
+    background-color: #552565;
+    transform: translateY(-1px);
+}
+.finish-purchase-btn[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Mensaje de éxito */
+.success-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #4CAF50; /* Verde */
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    z-index: 1000;
+    font-size: 1.3rem;
+    display: none; /* Inicialmente oculto */
+}
+
+/* RESPONSIVE */
+@media(max-width: 800px) {
+    .checkout-container {
+        flex-direction: column;
+    }
+    .input-group.half-width {
+        flex: 1 1 100%; /* Ocupa todo el ancho en móvil */
+    }
+}
+@media(max-width: 500px) {
+    .summary-controls {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .summary-price {
+        order: 3; 
+        width: auto;
+        flex-basis: 100%;
+        text-align: left;
+    }
+    .remove-item-btn {
+        padding: 5px 0;
+    }
+}
+/* --- ESTILOS DE LA PÁGINA DE DETALLE DEL PRODUCTO --- */
+
+.product-detail-section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.detail-container {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+/* Bloque Izquierdo: Galería */
+.gallery-block {
+    flex: 1;
+    max-width: 500px;
+    position: sticky; /* Fija la galería al hacer scroll */
+    top: 20px;
+}
+
+.main-image-container {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.thumbnail:hover, .thumbnail.active {
+    border-color: var(--accent-dark);
+    transform: scale(1.05);
+}
+
+/* Bloque Derecho: Información */
+.info-block {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.info-block h1 {
+    font-size: 2.5rem;
+    color: var(--brand-dark);
+    margin-bottom: 5px;
+}
+
+.product-sku, .product-weight {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.product-weight span {
+    font-weight: 600;
+}
+
+.product-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin-bottom: 30px;
+}
+
+/* Controles (Talla y Botón) */
+.controls-container {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.size-selector-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.size-selector-group label {
+    font-weight: 600;
+}
+
+#size-selector {
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--accent-light);
+}
+
+.add-to-cart-detail-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-dark);
+    color: var(--accent-light);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.add-to-cart-detail-btn:hover {
+    background-color: #552565;
+    transform: translateY(-2px);
+}
+
+/* Descripción y Guía */
+.detail-description h3 {
+    font-size: 1.3rem;
+    color: var(--brand-dark);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--bg-secondary);
+}
+
+.detail-description p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.detail-description ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+/* Mensaje de éxito (usamos la clase de productos) */
+.added-success-message {
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #4CAF50; 
+    color: white;
+    font-weight: 600;
+}
+
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .detail-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .gallery-block {
+        max-width: 100%;
+        position: static; /* Quitar sticky en móvil */
+    }
+    
+    .info-block {
+        padding: 0;
+    }
+}
+/* ======================================= */
+/* 🏠 ESTILOS DE PORTADA (index.html)      */
+/* ======================================= */
+
+.hero-section {
+    position: relative;
+    height: 85vh; 
+    width: 100%;
+    /* Alineación principal a la izquierda */
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    color: white; 
+    overflow: hidden;
+    
+    /* Configuración del VIDEO: Quitamos la propiedad background-image */
+    background-color: #000000; 
+}
+
+/* 🎥 ESTILO CLAVE: Hace que el video MP4 cubra todo el contenedor */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0; /* Capa más baja */
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* Capa oscura semitransparente (Encima del video) */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; /* Encima del video, debajo del contenido */
+}
+
+/* Contenedor de contenido (Textos y Botones - Encima de todo) */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    max-width: 800px;
+    /* Alineación de texto y contenido a la izquierda */
+    text-align: left; 
+    margin-right: auto; 
+    margin-left: 5%; 
+}
+
+/* --- TÍTULO PRINCIPAL (DISCOVER THE VOID) --- */
+.hero-main-title {
+    font-size: 1.0rem; 
+    font-weight: bold;
+    letter-spacing: 30px; /* Separación de letras aumentada */
+    margin-bottom: 20px; 
+    text-transform: uppercase;
+}
+
+/* --- SUBTÍTULO (Nuevas camisetas - EL MÁS GRANDE) --- */
+.hero-subtitle {
+    font-size: 3.5rem; 
+    margin-top: 15px; 
+    margin-bottom: 25px; 
+    font-weight: 300;
+}
+
+/* --- DESCRIPCIÓN --- */
+.hero-desc {
+    font-size: 1.5rem; 
+    margin-bottom: 40px;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Contenedor de botones */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start; 
+    flex-wrap: wrap; 
+}
+
+/* Estilos de botones BASE */
+.hero-btn {
+    padding: 15px 30px;
+    border: 2px solid;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+/* ======================================= */
+/* 🎨 ESTILOS DE BOTONES PERSONALIZADOS (Rellenos) */
+/* ======================================= */
+
+/* Botón "Medieval by Ckidd" (Relleno Marrón/Rojo) */
+.btn-ckidd {
+    background-color: #6e2c15; /* Último color especificado */
+    border-color: #6e2c15; 
+	border-radius: 12px;
+    color: white; 
+}
+
+.btn-ckidd:hover {
+    background-color: transparent; 
+    color: #ff4500; 
+    border-color: #ff4500;
+}
+
+/* Botón "Update" (Relleno Morado de la marca) */
+.btn-update {
+    background-color: #6e2d81; 
+    border-color: #6e2d81;
+	border-radius: 12px;
+    color: white; 
+}
+
+.btn-update:hover {
+    background-color: transparent; 
+    color: #6e2d81; 
+    border-color: #6e2d81;
+}
+
+/* ======================================= */
+/* 🛒 ESTILOS DE SECCIONES DESTACADAS     */
+/* ======================================= */
+
+.featured-products {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto; 
+}
+
+.feature-block {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 80px; 
+    gap: 40px; 
+}
+
+.feature-image {
+    flex: 1; 
+    min-width: 0;
+}
+
+.feature-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.feature-text {
+    flex: 1; 
+    padding: 20px;
+}
+
+.feature-text h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #6e2d81; /* Morado de la marca */
+}
+
+.feature-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Enlace de llamada a la acción dentro del bloque de texto */
+.cta-link {
+    color: #ff4500; 
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid #ff4500;
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.cta-link:hover {
+    color: #6e2d81; 
+    border-bottom-color: #6e2d81; /* Cambio de color del subrayado */
+}
+
+/* AJUSTE PARA EL BLOQUE 2 (Imagen a la derecha) */
+.feature-right-image {
+    flex-direction: row-reverse; /* Esto asegura la alternancia: Imagen a la derecha, Texto a la izquierda */
+}
+
+/* Bloque final de llamada a la acción */
+.explore-cta {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.explore-cta h3 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.explore-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+/* ======================================= */
+/* 📱 AJUSTES PARA MÓVILES                */
+/* ======================================= */
+@media (max-width: 768px) {
+    /* Ajustes para la portada */
+    .hero-main-title { font-size: 1rem; letter-spacing: 15px; } 
+    .hero-subtitle { font-size: 2.5rem; }
+    .hero-desc { font-size: 1.2rem; }
+    .hero-buttons { 
+        flex-direction: column; 
+        gap: 10px; 
+        justify-content: flex-start; 
+        align-items: flex-start;
+    }
+    
+    /* Ajustes para productos destacados */
+    .feature-block, .feature-right-image {
+        flex-direction: column; /* Apilamos la imagen y el texto verticalmente */
+    }
+    
+    .feature-text {
+        padding: 0;
+        text-align: center;
+    }
+    
+    .feature-text h3 {
+        margin-top: 20px;
+    }
+    
+    .cta-link {
+        display: inline-block;
+    }
+}
+/* --- ESTILOS DEL POPUP DE COOKIES --- */
+
+.cookie-consent-bar {
+    /* Fija el popup en la parte inferior de la ventana */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+    /* Estilos visuales */
+    background-color: var(--brand-dark); /* Fondo oscuro (casi negro) */
+    color: var(--accent-light);          /* Texto claro */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 10000; /* Debe estar por encima de todos los demás elementos fijos (header, footer) */
+    
+    /* Estado inicial: oculto (se mostrará con JS si es necesario) */
+    display: none; 
+}
+
+.cookie-consent-bar p {
+    margin: 0;
+    font-size: 0.95rem;
+    max-width: 800px;
+    text-align: center;
+}
+
+.cookie-accept-btn {
+    /* Botón de Aceptar con el color de acento morado */
+    background-color: var(--accent-dark); 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+}
+
+.cookie-accept-btn:hover {
+    background-color: #552467; /* Un tono un poco más oscuro al pasar el ratón */
+}
+
+/* Responsive para dispositivos pequeños */
+@media (max-width: 700px) {
+    .cookie-consent-bar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .cookie-consent-bar p {
+        text-align: center;
+    }
+}
+/* --- ESTILOS PARA PÁGINAS LEGALES (AVISO LEGAL, POLÍTICA) --- */
+
+.legal-section {
+    padding: 100px 40px; /* Padding superior para compensar el header */
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.7; /* Mejorar legibilidad */
+    color: var(--text);
+}
+
+.legal-title {
+    font-size: 2.2rem;
+    color: var(--brand-dark);
+    margin-bottom: 5px;
+    font-weight: 800;
+}
+
+.website-domain {
+    font-size: 1.2rem;
+    color: var(--accent-dark);
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.legal-block {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.legal-block h3 {
+    font-size: 1.6rem;
+    color: var(--brand-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.legal-block h4 {
+    font-size: 1.3rem;
+    color: var(--accent-dark);
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.legal-block ul {
+    list-style-type: disc;
+    padding-left: 25px;
+    margin: 15px 0;
+}
+
+.small-print {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 30px;
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    .legal-section {
+        padding: 80px 20px 40px;
+    }
+    .legal-title {
+        font-size: 1.8rem;
+    }
+    .website-domain {
+        font-size: 1rem;
+    }
+}
+.cookie-link {
+    color: var(--accent-light); /* o usa un blanco puro (#fff) */
+    text-decoration: underline;
+    font-weight: 600;
+}
+/* ======================================= */
+/* RESPONSIVE */
+/* ======================================= */
+/* Ocultar el botón de hamburguesa por defecto */
+.hamburger-btn {
+    display: none;
+}
+@media(max-width: 800px){
+    /* HEADER & NAV CORRECCIÓN */
+@media (max-width: 768px) {
+    /* **ESTILOS DEL HEADER** (Ajustados de tu código) */
+    .site-header {
+        /* Aseguramos que el header sea un contenedor flexible para alinear logo, botón y carrito */
+        display: flex; 
+        align-items: center;
+        padding: 20px;
+        justify-content: space-between; 
+        gap: 0; 
+    }
+    .logo-link img.logo { height: 60px; }
+
+
+    /* **ESTILOS DEL BOTÓN HAMBURGUESA** */
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1000; /* Siempre encima del menú */
+    }
+
+    .hamburger-btn .bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #333; /* Color de las barras */
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* **ANIMACIÓN (TRANSFORMACIÓN A 'X')** */
+    .hamburger-btn.open .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+    .hamburger-btn.open .bar:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+
+    /* **ESTILOS DEL MENÚ COMPLETO (OCULTO POR DEFECTO)** */
+.nav-container {
+        display: none !important; 
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        
+        /* ---------------------------------------------------- */
+        /* ✨ NUEVOS ESTILOS PARA EL EFECTO CRISTAL ✨ */
+        /* ---------------------------------------------------- */
+        /* 1. Fondo semitransparente (Necesario para que el filtro funcione) */
+        background-color: rgba(0, 0, 0, 0.7); 
+        
+        /* 2. Propiedad de filtro (Añade el desenfoque) */
+        backdrop-filter: blur(8px); 
+        -webkit-backdrop-filter: blur(8px); /* Para compatibilidad con Safari */
+        /* ---------------------------------------------------- */
+        
+        padding-top: 80px; 
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    /* **ESTILO DEL MENÚ CUANDO ESTÁ ABIERTO** */
+    .nav-container.open {
+        display: flex !important; 
+    }
+
+    /* Estilo para los enlaces dentro del menú móvil (todos visibles) */
+    .nav-container a {
+        display: block !important;
+        color: white;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 1.2em;
+        width: 100%;
+        /* Opcional: Para mejorar la legibilidad sobre el fondo desenfocado, podrías añadir un borde o sombra sutil */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+    }
+    
+    /* **OTROS ESTILOS DEL USUARIO** (Mantenidos) */
+
+    /* Ajustar la burbuja del carrito */
+    .cart-bubble{
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .cart-bubble img{ height: 22px; }
+
+    /* HERO SECTION */
+    .hero-section{
+        height: 80vh; 
+    }
+    .main-title{
+        font-size: 3rem;
+        letter-spacing: 0.4rem;
+    }
+    .main-subtitle{
+        font-size: 1.2rem;
+    }
+    
+    /* CARDS SECTION */
+    .cards-section{
+        padding: 40px 20px;
+    }
+    .cards-title{
+        font-size: 2rem;
+    }
+    .card-grid{
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        gap: 20px;
+    }
+    
+    /* FOOTER */
+    .footer-container{ flex-direction: column; align-items: flex-start; }
+    .footer-links-grid{ 
+        flex-direction: column;
+        gap: 20px; 
+        width: 100%;
+    }
+    .footer-right {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .newsletter {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .newsletter input {
+        width: 100%;
+        margin-right: 0;
+    }
+    .newsletter button {
+        width: 100%;
+    }
+    .instagram {
+        justify-content: flex-start;
+        margin-top: 15px;
+    }
+    .discover{
+        font-size: 1.8rem; 
+        letter-spacing: 5px; 
+        margin-top: 30px;
+        padding: 0 10px;
+    }
+
+    /* RESPONSIVE DE COOKIE BAR */
+    .cookie-consent-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 15px;
+    }
+    .cookie-consent-bar p {
+        font-size: 0.9rem;
+    }
+    .cookie-accept-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
