@@ -1,0 +1,2 @@
+Puedes utilizar la pagina web de forma local, pero no se van a cargar las particulas de los fondos
+y esto generara que la web en local vaya lenta. Recomiendo visualizarla desde la web del documento URL.txt
